@@ -15,14 +15,14 @@ LIBFT_CFLAGS = -fPIC
 MLX_DIR = $(INCLUDES)MLX42/
 MLX 	= $(MLX_DIR)build/libmlx42.a $(PRFLAGS)
 
-MAP_DIR  = map/
-MAP      = 
+PARSING_DIR  = parsing/
+PARSING		 = basics_parsing
 
 PLAYER_DIR = player/
 PLAYER    =
 
 SRC_FILES  += main utils
-SRC_FILES  += $(addprefix $(MAP_DIR), $(MAP))
+SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
 SRC_FILES  += $(addprefix $(PLAYER_DIR), $(PLAYER))
 
 SRC         = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -50,7 +50,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
-					@mkdir -p $(OBJ_DIR)$(MAP_DIR)
+					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
 					@mkdir -p $(OBJ_DIR)$(PLAYER_DIR)
 
 clean:
