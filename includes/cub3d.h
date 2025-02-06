@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/01/31 18:58:38 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:36:11 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,45 @@
 # define CUB3D_H
 
 # include "Libft/libft.h"
+# include "MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <unistd.h>
 
-# define HEIGHT 720
-# define WIDTH 1200
+# define WIDTH 1920
+# define HEIGHT 1080
 
-typedef struct s_info
+typedef struct s_coord
 {
-	// position et direction du player
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	// map
-	char	**map;
-	// textures
-	char	*texture_path[4];
-	char	*textures[4];
-	// sol et plafond
-	int		floor_color;
-	int		ceiling_color;
-	// MLX
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}			t_info;
+	double			x;
+	double			y;
+}					t_coord;
 
-typedef struct s_parse
+typedef struct s_all
 {
-	int		fd_map;
-	int		fd_texture;
-}			t_parse;
+	t_coord			player_pos;
+	t_coord			dir_pos;
+	t_coord			plane_pos;
+	int				starting_dir;
+	char			**map;
+	char			**infos;
+	mlx_texture_t	*tab_textures[4];
+	mlx_t			*mlx;
+}					t_all;
 
 // PARSING
-int			check_extension(char *str);
-int			check_opening(char *file, int *fd);
-int			take_info_map(t_info *info, int fd_map);
-int			init_infos(t_info *info);
-int			find_player_position(t_info *info);
+void				parsing(t_all **all, int ac, char **av);
+void				init_ptr(t_all **all);
+void				check_args(int ac, char **av);
+int					check_format(char *str, char *cmp);
+int					is_line_map(t_all *all, char *line);
+void				check_valid_map(t_all **all);
+char				**add_line(char **tab, char *line);
 
 // UTILS
-void		exit_error(char *str);
-void		free_double(char **tab);
+int					only_spaces(char *str);
+void				exit_error(char *str);
+void				ft_all_exit(t_all *all, char *str);
+void				free_all(t_all *all);
+void				free_tab(char **tab);
 
 #endif

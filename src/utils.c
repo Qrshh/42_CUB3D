@@ -5,31 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 18:20:40 by abesneux          #+#    #+#             */
-/*   Updated: 2025/01/31 18:20:40 by abesneux         ###   ########.fr       */
+/*   Created: 2025/02/03 18:12:18 by abesneux          #+#    #+#             */
+/*   Updated: 2025/02/03 20:07:34 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_double(char **tab)
+int only_spaces(char *str)
 {
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
+    int i;
+    i = -1;
+    while(str[++i] && str[i] != '\n')
+        if(!(str[i] >= '\t' && str[i] <= '\r') && str[i] != ' ')
+            return(1);
+    return(0);
 }
 
-void	exit_error(char *str)
+void free_tab(char **tab)
 {
-	ft_printf("Error\n");
-	ft_printf("%s\n", str);
-	exit(EXIT_FAILURE);
+    int i;
+
+    i = 0;
+    if(!tab)
+        return ;
+    while(tab[i])
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
+}
+
+void ft_all_exit(t_all *all, char *str)
+{
+    free_all(all);
+    exit_error(str);
+}
+
+void free_all(t_all *all)
+{
+    int i;
+
+    i = -1;
+    while(all->map[++i])
+        free(all->map[i]);
+    i = -1;
+    while(all->infos[++i])
+        free(all->infos[i]);
+    i = -1;
+    while(++i < 4)
+    {
+        if(all->tab_textures[i])
+            mlx_delete_texture(all->tab_textures[i]);
+    }
+    mlx_terminate(all->mlx);
+    free(all->map);
+    free(all);
+}
+
+void exit_error(char *str)
+{
+    ft_printf("Error\n%s\n", str);
+    exit(EXIT_FAILURE);
 }

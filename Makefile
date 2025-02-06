@@ -16,7 +16,7 @@ MLX_DIR = $(INCLUDES)MLX42/
 MLX 	= $(MLX_DIR)build/libmlx42.a $(PRFLAGS)
 
 PARSING_DIR  = parsing/
-PARSING		 = basics_parsing init_infos player_parsing
+PARSING		 = check_map parsing_utils parsing
 
 PLAYER_DIR = player/
 PLAYER    =
