@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:12:18 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/03 20:07:34 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:54:40 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ void ft_all_exit(t_all *all, char *str)
 
 void free_all(t_all *all)
 {
-    int i;
+    int i; 
 
-    i = -1;
-    while(all->map[++i])
-        free(all->map[i]);
-    i = -1;
-    while(all->infos[++i])
-        free(all->infos[i]);
+    if(all->map)
+        free_tab(all->map);
+    if(all->infos)
+        free_tab(all->infos);
     i = -1;
     while(++i < 4)
     {
@@ -60,7 +58,6 @@ void free_all(t_all *all)
             mlx_delete_texture(all->tab_textures[i]);
     }
     mlx_terminate(all->mlx);
-    free(all->map);
     free(all);
 }
 

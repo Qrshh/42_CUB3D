@@ -30,18 +30,19 @@ void fill_tab(t_all **all, char *filename)
         if(is_line_map(*all, line))
         {
             if(!only_spaces(line))
-            {
                 flag = 1;
-                ft_printf("%d\n flag : ", flag);
-            }
             if(flag)
+            {
+                if(line[0]=='\n')
+                {
+                    free(line);
+                    continue ;
+                }
                 (*all)->map = add_line((*all)->map, line);
+            }
         }
-        else if (!only_spaces(line))
-        {
-            ft_printf("%d\n flag : ", flag);
+        else if (only_spaces(line))
             (*all)->infos = add_line((*all)->infos, line);
-        }
         free(line);
     }
     close(fd);
