@@ -10,6 +10,7 @@ void	check_args(int ac, char **av)
 void check_file(t_all **all)
 {
     check_valid_map(all);
+    //check les instructions donnees
 }
 
 void fill_tab(t_all **all, char *filename)

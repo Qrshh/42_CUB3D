@@ -6,11 +6,18 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/06 21:55:33 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:42:40 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_allowed_char(char c)
+{
+	if (c == ' ' || c == '0' || c == 'N' || c == 'E' || c == 'S' || c == 'W')
+		return (1);
+	return (0);
+}
 
 char	**add_line(char **tab, char *line)
 {

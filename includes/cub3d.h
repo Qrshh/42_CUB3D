@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/06 21:45:15 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:42:49 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_all
 	t_coord			plane_pos;
 	int				starting_dir;
 	char			**map;
+	int				width_map;
 	char			**infos;
 	mlx_texture_t	*tab_textures[4];
 	mlx_t			*mlx;
@@ -47,6 +48,7 @@ int					check_format(char *str, char *cmp);
 int					is_line_map(t_all *all, char *line);
 void				check_valid_map(t_all **all);
 char				**add_line(char **tab, char *line);
+int					is_allowed_char(char c);
 
 // UTILS
 int					only_spaces(char *str);

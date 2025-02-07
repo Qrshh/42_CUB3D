@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/07 15:29:44 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:43:49 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,4 @@ int main(int ac, char **av)
 	int i = -1;
 	while (all->map && all->map[++i])  // Vérification que all->infos est valide
 		ft_printf("%s\n", all->map[i]);
-
 }
