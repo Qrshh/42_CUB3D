@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/06 21:48:13 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:29:44 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int main(int ac, char **av)
 		ft_all_exit(all, "infos is NULL in main");
 	int i = -1;
 	while (all->map && all->map[++i])  // Vérification que all->infos est valide
-		ft_printf("%d %s\n", i, all->map[i]);
+		ft_printf("%s\n", all->map[i]);
 
 }
