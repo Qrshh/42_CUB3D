@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/07 18:42:40 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:23:40 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	init_ptr(t_all **all)
 
 	*all = ft_calloc(1, sizeof(t_all));
 	(*all)->map = NULL;
-    (*all)->infos = NULL;
+	(*all)->infos = NULL;
 	(*all)->mlx = mlx_init(WIDTH, HEIGHT, "YOUPI", 1);
 	i = -1;
 	while (++i < 4)
@@ -78,7 +78,7 @@ void	init_ptr(t_all **all)
 
 int	check_format(char *str, char *cmp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] && ft_strcmp(&str[i], cmp) != 0)
