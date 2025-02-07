@@ -57,16 +57,16 @@ clean:
 					@make clean -C $(LIBFT_DIR)
 					$(RM) $(OBJ_DIR)
 					$(RM) $(OBJ_CACHE)
-					@echo "so_long and libs object files cleaned!"
+					@echo "$(NAME) and libs object files cleaned!"
 
 fclean: 		clean
 					@make fclean -C $(LIBFT_DIR)
 					$(RM) $(NAME)
-					@echo "so_long and libs executable files cleaned!"
+					@echo "$(NAME) and libs executable files cleaned!"
 					rm -f $(MLX_DIR)build/CMakeCache.txt
 
 re: 			fclean all
-					@echo "Cleaned and rebuilt everything for so_long!"
+					@echo "Cleaned and rebuilt everything for $(NAME)!"
 
 .PHONY:			all clean fclean re
 
