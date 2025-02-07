@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:29:01 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/07 19:23:35 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:30:06 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,14 @@ int	check_starting_pos(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (ft_strchr("NEWS", map[i][j]))
+			if (map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'S'
+				|| map[i][j] == 'W')
 				starting_pos++;
 		}
 	}
-	return (starting_pos != 1);
+	if (starting_pos == 1)
+		return (1);
+	return (0);
 }
 
 void	check_valid_map(t_all **all)
