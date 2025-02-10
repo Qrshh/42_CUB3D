@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:29:01 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/07 19:30:06 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:25:12 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	is_map_close(char **map)
 	int	i;
 	int	j;
 	int	len;
-	int	width;
+	int	height; /** CHANGE TO HEIGHT FOR BETTER UNDERSTANDING **/
 
 	i = -1;
 	while (map[++i])
 		;
-	width = i;
+	height = i;
 	i = -1;
-	while (map[++i])
+	while (++i < height) // CHANGE CONDITION TO i < height
 	{
 		j = -1;
 		len = ft_strlen(map[i]);
@@ -40,20 +40,21 @@ int	is_map_close(char **map)
 		{
 			if (ft_isspace(map[i][j]))
 				continue ;
-			if (i == 0 || i == width - 1 || j == 0 || j == len - 1)
+			if (i == 0 || i == height - 1 || j == 0 || j == len - 1)
 			{
 				if (map[i][j] != '1')
 					return (0);
 			}
 			else if (is_allowed_char(map[i][j]))
 			{
-				if ((j > 0 && ft_isspace(map[i][j - 1])) || (j < len - 1
-						&& ft_isspace(map[i][j + 1])) || (i > 0
-						&& ft_isspace(map[i - 1][j])) || (i < width - 1
-						&& ft_isspace(map[i + 1][j])))
+				if ((j > 0 && (ft_isspace(map[i][j - 1]) || map[i][j - 1] == '\0'))
+					|| (j < len - 1 && (ft_isspace(map[i][j + 1]) || map[i][j + 1] == '\0'))
+					|| (i > 0 && (ft_isspace(map[i - 1][j]) || map[i - 1][j] == '\0'))
+					|| (i < height - 1 && (ft_isspace(map[i + 1][j]) || map[i + 1][j] == '\0')))
 				{
-					return (0);
+					return (0); 
 				}
+				// CHANGE IF FOR CHECK \0
 			}
 		}
 	}
