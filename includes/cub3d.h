@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/07 18:42:49 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:01:54 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ typedef struct s_all
 	char			**infos;
 	mlx_texture_t	*tab_textures[4];
 	mlx_t			*mlx;
+	int				f;
+	int				c;
+	int				no;
+	int				so;
+	int				we;
+	int				ea;
+	int				color_c;
+	int				color_f;
 }					t_all;
 
 // PARSING
@@ -49,7 +57,10 @@ int					is_line_map(t_all *all, char *line);
 void				check_valid_map(t_all **all);
 char				**add_line(char **tab, char *line);
 int					is_allowed_char(char c);
-
+void				is_info_valid(t_all **all, char *line);
+void				update_count(t_all **all, char *id);
+void				is_valid_color(t_all **all, char *line);
+void				update_color(t_all **all, char *color, char id);
 // UTILS
 int					only_spaces(char *str);
 void				exit_error(char *str);

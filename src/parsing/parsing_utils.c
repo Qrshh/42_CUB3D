@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/07 19:23:40 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:51:56 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	is_line_map(t_all *all, char *line)
 void	init_ptr(t_all **all)
 {
 	int	i;
-
 	*all = ft_calloc(1, sizeof(t_all));
 	(*all)->map = NULL;
 	(*all)->infos = NULL;
