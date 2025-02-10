@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 21:34:52 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/10 22:42:03 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-# define MOV_SPEED 0.1
+# define MOV_SPEED 1
 # define ROT_SPEED 0.05
 # define TILE_SIZE 16
 
@@ -74,5 +74,9 @@ void				free_tab(char **tab);
 
 // RENDER
 void				draw_map(t_all *all);
+void	square(t_all *all, int x, int y, int color);
+
+// PLAYER
+void 				move(mlx_key_data_t keydata, void *param);
 
 #endif

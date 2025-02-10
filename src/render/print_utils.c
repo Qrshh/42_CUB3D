@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/10 21:28:21 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/10 22:36:32 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ void	square(t_all *all, int x, int y, int color)
 		ft_all_exit(all, "mlx_image_to_window failed in square");
 }
 
+int	only_direction(char c)
+{
+	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
+		return (1);
+	return (0);
+}
+
 void	draw_map(t_all *all)
 {
 	int	i = 0;
@@ -52,4 +59,5 @@ void	draw_map(t_all *all)
 		}
 		i++;
 	}
+	square(all, all->player_pos.x * TILE_SIZE, all->player_pos.y * TILE_SIZE, all->color_f);
 }

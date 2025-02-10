@@ -21,9 +21,13 @@ PARSING		 = check_map parsing_utils parsing parsing_path parsing_color
 RENDER_DIR = render/
 RENDER    = player print_utils
 
+PLAYER_DIR = player/
+PLAYER = player
+
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
 SRC_FILES  += $(addprefix $(RENDER_DIR), $(RENDER))
+SRC_FILES  += $(addprefix $(PLAYER_DIR), $(PLAYER))
 SRC         = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ         = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
@@ -60,6 +64,7 @@ $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
 					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
 					@mkdir -p $(OBJ_DIR)$(RENDER_DIR)
+					@mkdir -p $(OBJ_DIR)$(PLAYER_DIR)
 
 clean:
 					@make clean -C $(LIBFT_DIR) --quiet
