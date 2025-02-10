@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:24:24 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 19:34:29 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:18:57 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,19 @@ void	check_file(t_all **all)
 	{
 		if(size == 0)
 			is_info_valid(all, (*all)->infos[size]);
-		
+		else if (size == 1)
+			is_info_valid(all, (*all)->infos[size]);
+		else if (size == 2)
+			is_info_valid(all, (*all)->infos[size]);
+		else if (size == 3)
+			is_info_valid(all, (*all)->infos[size]);
+		else if (size == 4)
+			is_info_valid(all, (*all)->infos[size]);
+		else if (size == 5)
+			is_info_valid(all, (*all)->infos[size]);
 	}
+	if(size != 6)
+		ft_all_exit(*all, "Wrong number of informations");
 }
 
 void	fill_tab(t_all **all, char *filename)
