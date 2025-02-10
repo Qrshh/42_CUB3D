@@ -18,12 +18,12 @@ MLX 	= $(MLX_DIR)build/libmlx42.a $(PRFLAGS)
 PARSING_DIR  = parsing/
 PARSING		 = check_map parsing_utils parsing
 
-PLAYER_DIR = player/
-PLAYER    =
+RENDER_DIR = render/
+RENDER    = player
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
-SRC_FILES  += $(addprefix $(PLAYER_DIR), $(PLAYER))
+SRC_FILES  += $(addprefix $(RENDER_DIR), $(RENDER))
 
 SRC         = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ         = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -51,7 +51,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJ_CACHE)
 $(OBJ_CACHE):
 					@mkdir -p $(OBJ_DIR)
 					@mkdir -p $(OBJ_DIR)$(PARSING_DIR)
-					@mkdir -p $(OBJ_DIR)$(PLAYER_DIR)
+					@mkdir -p $(OBJ_DIR)$(RENDER_DIR)
 
 clean:
 					@make clean -C $(LIBFT_DIR)
