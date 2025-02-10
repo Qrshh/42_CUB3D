@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:24:24 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 21:18:57 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:31:38 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	check_args(int ac, char **av)
 
 void	check_file(t_all **all)
 {
-	int size;
-	
+	int	size;
+
 	check_valid_map(all);
 	size = -1;
-	while((*all)->infos && (*all)->infos[++size])
+	while ((*all)->infos && (*all)->infos[++size])
 	{
-		if(size == 0)
+		if (size == 0)
 			is_info_valid(all, (*all)->infos[size]);
 		else if (size == 1)
 			is_info_valid(all, (*all)->infos[size]);
@@ -41,7 +41,7 @@ void	check_file(t_all **all)
 		else if (size == 5)
 			is_info_valid(all, (*all)->infos[size]);
 	}
-	if(size != 6)
+	if (size != 6)
 		ft_all_exit(*all, "Wrong number of informations");
 }
 
@@ -81,10 +81,40 @@ void	fill_tab(t_all **all, char *filename)
 	close(fd);
 }
 
+void	init_player_position(t_all **all)
+{
+	int	i;
+	int	j;
+	int	found;
+
+	found = 0;
+	i = -1;
+	while ((*all)->map[++i])
+	{
+		j = -1;
+		while ((*all)->map[i][++j])
+		{
+			if (((*all)->map[i][j] == 'N') || ((*all)->map[i][j] == 'E')
+				|| ((*all)->map[i][j]) == 'S' || ((*all)->map[i][j] == 'W'))
+			{
+				found = 1;
+				(*all)->player_pos.x = j + 0.5;
+				(*all)->player_pos.y = i + 0.5;
+				(*all)->starting_dir = (*all)->map[i][j];
+				(*all)->map[i][j] = '0';
+				break ;
+			}
+		}
+		if (found)
+			break ;
+	}
+}
+
 void	parsing(t_all **all, int ac, char **av)
 {
 	check_args(ac, av);
 	init_ptr(all);
 	fill_tab(all, av[1]);
 	check_file(all);
+	init_player_position(all);
 }
