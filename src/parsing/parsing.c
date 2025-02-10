@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:24:24 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/07 19:24:36 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/10 19:34:29 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@ void	check_args(int ac, char **av)
 
 void	check_file(t_all **all)
 {
+	int size;
+	
 	check_valid_map(all);
-	// check les instructions donnees
+	size = -1;
+	while((*all)->infos && (*all)->infos[++size])
+	{
+		if(size == 0)
+			is_info_valid(all, (*all)->infos[size]);
+		
+	}
 }
 
 void	fill_tab(t_all **all, char *filename)
