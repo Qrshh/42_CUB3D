@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 20:59:26 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/10 21:24:25 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,8 @@ void	escape(void *param)
 int	main(int ac, char **av)
 {
 	t_all	*all;
-	int		i;
 
 	parsing(&all, ac, av);
-	if (!all->map)
-		ft_all_exit(all, "infos is NULL in main");
-	i = -1;
-	while (all->map && all->map[++i])
-		ft_printf("%s\n", all->map[i]);
 	draw_map(all);
 	mlx_loop_hook(all->mlx, escape, all);
 	mlx_loop(all->mlx);

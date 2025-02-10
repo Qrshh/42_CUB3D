@@ -66,7 +66,6 @@ int	is_line_map(t_all *all, char *line)
 void	init_ptr(t_all **all)
 {
 	int	i;
-
 	*all = ft_calloc(1, sizeof(t_all));
 	(*all)->map = NULL;
 	(*all)->infos = NULL;
