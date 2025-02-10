@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 21:01:54 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:34:52 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+
+# define MOV_SPEED 0.1
+# define ROT_SPEED 0.05
+# define TILE_SIZE 16
 
 typedef struct s_coord
 {
@@ -67,5 +71,8 @@ void				exit_error(char *str);
 void				ft_all_exit(t_all *all, char *str);
 void				free_all(t_all *all);
 void				free_tab(char **tab);
+
+// RENDER
+void				draw_map(t_all *all);
 
 #endif

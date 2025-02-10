@@ -26,6 +26,7 @@ int	main(int ac, char **av)
 	t_all	*all;
 
 	parsing(&all, ac, av);
+	draw_map(all);
 	mlx_loop_hook(all->mlx, escape, all);
 	mlx_loop(all->mlx);
 	ft_all_exit(all, NULL);
