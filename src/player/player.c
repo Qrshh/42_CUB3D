@@ -6,38 +6,34 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/10 22:45:35 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 00:32:58 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void move(mlx_key_data_t keydata, void *param)
+void move(void *param)
 {
-    t_all *all = (t_all *)param;
-    static int old_x = 0;
-    static int old_y = 0;
+	t_all *all = (t_all *)param;
 
-    if (mlx_is_key_down(all->mlx, MLX_KEY_ESCAPE))
-        mlx_close_window(all->mlx);
+	int i = all->player_pos.y / TILE_SIZE; // Ligne actuelle
+	int j = all->player_pos.x / TILE_SIZE; // Colonne actuelle
 
-    // Sauvegarde la position actuelle
-    old_x = all->player_pos.x;
-    old_y = all->player_pos.y;
-
-    // Mise à jour de la position
-    if (keydata.key == MLX_KEY_W && keydata.action == MLX_REPEAT)
-        all->player_pos.y -= 5;
-    if (keydata.key == MLX_KEY_S && keydata.action == MLX_REPEAT)
-        all->player_pos.y += 5;
-    if (keydata.key == MLX_KEY_A && keydata.action == MLX_REPEAT)
-        all->player_pos.x -= 5;
-    if (keydata.key == MLX_KEY_D && keydata.action == MLX_REPEAT)
-        all->player_pos.x += 5;
-
-    // Efface uniquement l'ancienne position
-	square(all, old_x, old_y, 0x000000FF); // Fond noir// Fond noir
-
-    // Dessine le joueur à la nouvelle position
-    square(all, all->player_pos.x, all->player_pos.y, all->color_f);
+	// W = Aller vers le haut, donc vérifier la ligne au-dessus (i - 1)
+	if (mlx_is_key_down(all->mlx, MLX_KEY_W))
+	{
+		ft_printf("Player Grid Position: (%d, %d)\n", i, j);
+		all->player_pos.y -= 1; // Déplacement vers le haut
+		all->img->instances[0].y -= 1;
+	}
+	if (mlx_is_key_down(all->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(all->mlx);
+	// if (mlx_is_key_down(all->mlx, MLX_KEY_W))
+	// 	all->img->instances[0].y -= 5;
+	if (mlx_is_key_down(all->mlx, MLX_KEY_S))
+		all->img->instances[0].y += 5;
+	if (mlx_is_key_down(all->mlx, MLX_KEY_A))
+		all->img->instances[0].x -= 5;
+	if (mlx_is_key_down(all->mlx, MLX_KEY_D))
+		all->img->instances[0].x += 5;
 }

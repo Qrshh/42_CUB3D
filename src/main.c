@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 22:21:45 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 00:54:32 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ int	main(int ac, char **av)
 	t_all	*all;
 
 	parsing(&all, ac, av);
+	ft_printf("Player Position: (%f, %f)\n", all->player_pos.x, all->player_pos.y);
+	ft_printf("Pointer: %p\n", all);
+	ft_printf("Map: %c\n", all->map[1][1]);
+	mlx_texture_t *arrow = mlx_load_png("textures/arrow_minimap.png");
+	all->img = mlx_texture_to_image(all->mlx, arrow);
 	draw_map(all);
-	mlx_key_hook(all->mlx, move, all);
+	mlx_loop_hook(all->mlx, move, all);
 	mlx_loop(all->mlx);
 	ft_all_exit(all, NULL);
 }

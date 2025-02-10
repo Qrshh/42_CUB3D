@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:24:24 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 21:31:38 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 00:51:50 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,6 @@ void	parsing(t_all **all, int ac, char **av)
 	fill_tab(all, av[1]);
 	check_file(all);
 	init_player_position(all);
+	printf("Player Position: (%f, %f)\n", (*all)->player_pos.x, (*all)->player_pos.y);
+	ft_printf("Pointer dans parsing: %p\n", (*all));
 }

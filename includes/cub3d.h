@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 22:42:03 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 00:52:15 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include "MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdio.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 500
+# define HEIGHT 500
 
 # define MOV_SPEED 1
 # define ROT_SPEED 0.05
@@ -50,6 +51,8 @@ typedef struct s_all
 	int				ea;
 	int				color_c;
 	int				color_f;
+	mlx_image_t		*img;
+	mlx_image_t		*player_img;
 }					t_all;
 
 // PARSING
@@ -77,6 +80,7 @@ void				draw_map(t_all *all);
 void	square(t_all *all, int x, int y, int color);
 
 // PLAYER
-void 				move(mlx_key_data_t keydata, void *param);
+void move(void *param);
+
 
 #endif

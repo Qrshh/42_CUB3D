@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 21:25:24 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 00:51:05 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,25 @@ void	init_ptr(t_all **all)
 	(*all)->map = NULL;
 	(*all)->infos = NULL;
 	(*all)->mlx = mlx_init(WIDTH, HEIGHT, "YOUPI", 1);
+	(*all)->player_pos.x = 0;
+	(*all)->player_pos.y = 0;
+	(*all)->dir_pos.x = 0;
+	(*all)->dir_pos.y = 0;
+	(*all)->plane_pos.x = 0;
+	(*all)->plane_pos.y = 0;
+	(*all)->starting_dir = 0;
+	(*all)->f = 0;
+	(*all)->c = 0;
+	(*all)->no = 0;
+	(*all)->so = 0;
+	(*all)->we = 0;
+	(*all)->ea = 0;
+	(*all)->color_c = 0;
+	(*all)->color_f = 0;
+	(*all)->img = mlx_new_image((*all)->mlx, WIDTH, HEIGHT);
+	(*all)->player_img = mlx_new_image((*all)->mlx, 16, 16);
+	// (*all)->img = mlx_new_image((*all)->mlx, 10, 10);
+	// (*all)->player_img = mlx_new_image((*all)->mlx, 16, 16);
 	i = -1;
 	while (++i < 4)
 		(*all)->tab_textures[i] = NULL;

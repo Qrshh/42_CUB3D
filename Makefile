@@ -19,7 +19,7 @@ PARSING_DIR  = parsing/
 PARSING		 = check_map parsing_utils parsing parsing_path parsing_color
 
 RENDER_DIR = render/
-RENDER    = player print_utils
+RENDER    = print_utils
 
 PLAYER_DIR = player/
 PLAYER = player

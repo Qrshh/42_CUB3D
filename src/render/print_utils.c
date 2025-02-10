@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/10 22:36:32 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/10 23:46:21 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void	draw_map(t_all *all)
 		}
 		i++;
 	}
-	square(all, all->player_pos.x * TILE_SIZE, all->player_pos.y * TILE_SIZE, all->color_f);
+	mlx_image_to_window(all->mlx, all->img, all->player_pos.x * TILE_SIZE, all->player_pos.y * TILE_SIZE);
+
 }
