@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 19:15:04 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 19:34:21 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,20 @@ void	right(t_all *all)
 	}
 }
 
+void rotate_right(t_all *all)
+{
+    all->player_angle += ROT_SPEED;
+    if (all->player_angle > 2 * M_PI) // Empêcher un dépassement d'angle
+        all->player_angle -= 2 * M_PI;
+}
+
+void rotate_left(t_all *all)
+{
+    all->player_angle -= ROT_SPEED;
+    if (all->player_angle < 0)
+        all->player_angle += 2 * M_PI;
+}
+
 void	event_listener(void *param)
 {
 	t_all	*all;
@@ -91,6 +105,10 @@ void	event_listener(void *param)
 		left(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 		right(all);
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_RIGHT))
+		rotate_right(all);
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT))
+		rotate_left(all);
 	clear_ray(all);
-	draw_ray(all, M_PI / 8);
+	draw_ray(all, 0);
 }

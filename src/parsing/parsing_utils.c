@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 18:18:08 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:39:42 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void	init_ptr(t_all **all)
 	(*all)->mlx = mlx_init(WIDTH, HEIGHT, "YOUPI", 1);
 	(*all)->player_pos.x = 0;
 	(*all)->player_pos.y = 0;
-	(*all)->dir_pos.x = 0;
-	(*all)->dir_pos.y = 0;
+	(*all)->player_angle = M_PI / 2;
 	(*all)->plane_pos.x = 0;
 	(*all)->plane_pos.y = 0;
 	(*all)->starting_dir = 0;
