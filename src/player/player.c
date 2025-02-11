@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 19:34:21 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:43:24 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,17 @@ void	event_listener(void *param)
 		left(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 		right(all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_RIGHT))
+	clear_ray(all);
+	draw_ray(all, 0);
+}
+
+void	fov_mooves(void *param)
+{
+	t_all *all;
+
+	all = (t_all *)param;
+	if (mlx_is_key_down(all->mlx, MLX_KEY_RIGHT))
 		rotate_right(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT))
 		rotate_left(all);
-	clear_ray(all);
-	draw_ray(all, 0);
 }

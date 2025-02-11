@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 19:15:21 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 19:42:14 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
 	all->ray_img = mlx_new_image(all->mlx, WIDTH, HEIGHT);
 	draw_map(all);
 	mlx_loop_hook(all->mlx, event_listener, all);
+	mlx_loop_hook(all->mlx, fov_mooves, all);
 	mlx_loop(all->mlx);
 	ft_all_exit(all, NULL);
 }

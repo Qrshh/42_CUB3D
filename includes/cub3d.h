@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 19:32:48 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:43:36 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "Libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
-# include <unistd.h>
-# include <stdio.h>
 # include <math.h>
+# include <stdio.h>
+# include <unistd.h>
 
 # define WIDTH 500
 # define HEIGHT 500
@@ -36,7 +36,7 @@ typedef struct s_coord
 typedef struct s_all
 {
 	t_coord			player_pos;
-	double 			player_angle;
+	double			player_angle;
 	t_coord			plane_pos;
 	int				starting_dir;
 	char			**map;
@@ -83,9 +83,8 @@ void				square(t_all *all, int x, int y, int color);
 void				draw_ray(t_all *all, double angle);
 void				clear_ray(t_all *all);
 
-
 // PLAYER
-void 				event_listener(void *param);
-
+void				event_listener(void *param);
+void				fov_mooves(void *param);
 
 #endif
