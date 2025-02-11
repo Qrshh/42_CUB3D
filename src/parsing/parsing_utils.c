@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 20:42:50 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:52:18 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	init_ptr(t_all **all)
 	(*all)->img = mlx_new_image((*all)->mlx, WIDTH, HEIGHT);
 	(*all)->player_img = mlx_new_image((*all)->mlx, 16, 16);
 	(*all)->ray_img = NULL;
+	(*all)->wall_img = NULL;
 	// (*all)->img = mlx_new_image((*all)->mlx, 10, 10);
 	// (*all)->player_img = mlx_new_image((*all)->mlx, 16, 16);
 	i = -1;
