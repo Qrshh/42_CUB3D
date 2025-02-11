@@ -105,9 +105,16 @@ void	event_listener(void *param)
 		left(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 		right(all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_RIGHT))
+	draw_fov(all); // Si ca lag trop faut bouger ca dans les touches
+}
+
+void	fov_mooves(void *param)
+{
+	t_all *all;
+
+	all = (t_all *)param;
+	if (mlx_is_key_down(all->mlx, MLX_KEY_RIGHT))
 		rotate_right(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT))
 		rotate_left(all);
-	draw_fov(all); // Si ca lag trop faut bouger ca dans les touches
 }

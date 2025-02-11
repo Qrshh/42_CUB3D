@@ -16,9 +16,9 @@
 # include "Libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
-# include <unistd.h>
-# include <stdio.h>
 # include <math.h>
+# include <stdio.h>
+# include <unistd.h>
 
 # define WIDTH 500
 # define HEIGHT 500
@@ -37,7 +37,7 @@ typedef struct s_coord
 typedef struct s_all
 {
 	t_coord			player_pos;
-	double 			player_angle;
+	double			player_angle;
 	t_coord			plane_pos;
 	int				starting_dir;
 	char			**map;
@@ -84,9 +84,8 @@ void				square(t_all *all, int x, int y, int color);
 void				draw_ray(t_all *all, double angle);
 void				draw_fov(t_all *all);
 
-
 // PLAYER
-void 				event_listener(void *param);
-
+void				event_listener(void *param);
+void				fov_mooves(void *param);
 
 #endif
