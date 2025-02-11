@@ -7,7 +7,8 @@
 		"deque": "c",
 		"string": "c",
 		"type_traits": "c",
-		"random": "c"
+		"ranges": "c",
+		"__locale": "c"
 	},
 	"cmake.sourceDirectory": "/home/mosmont/Desktop/all_projects/42_CUB3D/includes/MLX42"
 }

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
 /*   Updated: 2025/02/11 22:04:38 by mosmont          ###   ########.fr       */
@@ -16,16 +16,18 @@
 # include "Libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
-# include <unistd.h>
-# include <stdio.h>
 # include <math.h>
+# include <stdio.h>
+# include <unistd.h>
 
 # define WIDTH 1920
 # define HEIGHT 1080
 
+
 # define MOV_SPEED 5
 # define ROT_SPEED 0.05
 # define TILE_SIZE 64
+# define COLLISION_MARGIN 5
 # define FOV (70 * (M_PI / 180.0))
 
 typedef struct s_coord
@@ -37,7 +39,7 @@ typedef struct s_coord
 typedef struct s_all
 {
 	t_coord			player_pos;
-	double 			player_angle;
+	double			player_angle;
 	t_coord			plane_pos;
 	int				starting_dir;
 	char			**map;
@@ -85,9 +87,9 @@ void				square(t_all *all, int x, int y, int color);
 void				draw_ray(t_all *all, double offset_angle, int x);
 void				draw_fov(t_all *all);
 
-
 // PLAYER
-void 				event_listener(void *param);
-
+void				init_player(t_all **all, int i, int j);
+void				event_listener(void *param);
+void				fov_mooves(void *param);
 
 #endif

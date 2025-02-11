@@ -22,7 +22,7 @@ RENDER_DIR = render/
 RENDER    = print_utils
 
 PLAYER_DIR = player/
-PLAYER = player
+PLAYER = player init_player
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))

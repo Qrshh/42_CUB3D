@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
 /*   Updated: 2025/02/11 20:52:18 by mosmont          ###   ########.fr       */
@@ -72,7 +72,7 @@ void	init_ptr(t_all **all)
 	(*all)->mlx = mlx_init(WIDTH, HEIGHT, "YOUPI", 1);
 	(*all)->player_pos.x = 0;
 	(*all)->player_pos.y = 0;
-	(*all)->player_angle = M_PI / 2;
+	(*all)->player_angle = 0;
 	(*all)->plane_pos.x = 0;
 	(*all)->plane_pos.y = 0;
 	(*all)->starting_dir = 0;
