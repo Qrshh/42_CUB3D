@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/10 23:46:21 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 18:20:00 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	draw_map(t_all *all)
 		}
 		i++;
 	}
-	mlx_image_to_window(all->mlx, all->img, all->player_pos.x * TILE_SIZE, all->player_pos.y * TILE_SIZE);
+	mlx_image_to_window(all->mlx, all->img, all->player_pos.x, all->player_pos.y);
 
 }

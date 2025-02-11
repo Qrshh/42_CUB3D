@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 00:52:15 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 18:48:49 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				draw_map(t_all *all);
 void	square(t_all *all, int x, int y, int color);
 
 // PLAYER
-void move(void *param);
+void event_listener(void *param);
 
 
 #endif
