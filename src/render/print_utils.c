@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 20:18:03 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 22:25:50 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	draw_fov(t_all *all)
 	double 	end_angle;
 	double 	step;
 	double	angle;
+	int		x;
 
 	start_angle = all->player_angle - (FOV / 2);
 	end_angle = all->player_angle + (FOV / 2);
 	step = FOV / WIDTH;
 	angle = start_angle;
+
 	if (!all->ray_img)
 	{
 		all->ray_img = mlx_new_image(all->mlx, WIDTH, HEIGHT);
@@ -30,14 +32,24 @@ void	draw_fov(t_all *all)
 	}
 	else
 		ft_bzero(all->ray_img->pixels, WIDTH * HEIGHT * 4);
+	if (!all->wall_img)
+	{
+		all->wall_img = mlx_new_image(all->mlx, WIDTH, HEIGHT);
+		mlx_image_to_window(all->mlx, all->wall_img, 0, 0);
+	}
+	else
+		ft_bzero(all->wall_img->pixels, WIDTH * HEIGHT * 4);
+	
+	x = 0;
 	while (angle <= end_angle)
 	{
-		draw_ray(all, angle);
+		draw_ray(all, angle, x);
 		angle += step;
+		x++;
 	}
 }
 
-void	draw_ray(t_all *all, double offset_angle)
+void	draw_ray(t_all *all, double offset_angle, int x)
 {
 	t_coord	player_coord;
 	t_coord	ray_coord;
@@ -50,7 +62,7 @@ void	draw_ray(t_all *all, double offset_angle)
 	player_coord.y = all->player_pos.y;
 
 	// Calculer l'angle du rayon en fonction de la direction du joueur
-	ray_angle = (all->player_angle + offset_angle);
+	ray_angle = (offset_angle);
 	ray_coord.x = cos(ray_angle);
 	ray_coord.y = sin(ray_angle);
 
@@ -64,6 +76,42 @@ void	draw_ray(t_all *all, double offset_angle)
 		if (all->map[map_y][map_x] == '1')
 			break ;
 		mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
+	}
+
+	double	distance;
+	double	wall_height;
+	double	fish_eye;
+	double	projected_wall_height;
+	int		y_start;
+	int		y_end;
+	int		y;
+
+	distance = sqrt(pow(player_coord.x - all->player_pos.x, 2)
+		+ pow(player_coord.y - all->player_pos.y, 2));
+	
+	fish_eye = distance * cos(ray_angle - all->player_angle);
+	
+	projected_wall_height = (WIDTH / 2) / tan(FOV / 2);
+	wall_height = (TILE_SIZE * projected_wall_height) / fish_eye;
+	
+	// if (wall_height > HEIGHT)
+	// 	wall_height = HEIGHT;
+	y_start = (HEIGHT / 2) - (wall_height / 2);
+	y_end = (HEIGHT / 2) + (wall_height / 2);
+	// if (y_start < 0)
+	// 	y_start = 0;
+	// if (y_end >= HEIGHT)
+	// 	y_end = HEIGHT - 1;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		if (y < y_start)
+			mlx_put_pixel(all->wall_img, x, y, all->color_c); // Couleur du ciel
+		else if (y > y_end)
+			mlx_put_pixel(all->wall_img, x, y, all->color_f); // Couleur du sol
+		else
+			mlx_put_pixel(all->wall_img, x, y, 0x87CEEB); // Couleur du mur
+		y++;
 	}
 }
 
@@ -111,13 +159,12 @@ void	draw_map(t_all *all)
 		while (all->map[i][j])
 		{
 			if (all->map[i][j] == '1')
-				square(all, j * TILE_SIZE, i * TILE_SIZE, 0xECCBD9);
+				square(all, j * TILE_SIZE, i * TILE_SIZE, 0xFF2D00);
 			else if (all->map[i][j] == '0')
-				square(all, j * TILE_SIZE, i * TILE_SIZE, 0x97D2FB);
+				square(all, j * TILE_SIZE, i * TILE_SIZE, 0xFFFFFF);
 			j++;
 		}
 		i++;
 	}
 	mlx_image_to_window(all->mlx, all->img, all->player_pos.x, all->player_pos.y);
-
 }
