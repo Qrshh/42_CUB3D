@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 19:14:59 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 19:33:13 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,23 @@ void	clear_ray(t_all *all)
 	}
 }
 
-void	draw_ray(t_all *all, double angle)
+void	draw_ray(t_all *all, double offset_angle)
 {
 	t_coord	player_coord;
 	t_coord	ray_coord;
 	int		map_x;
 	int		map_y;
 	int		i;
+	double	ray_angle;
 
 	player_coord.x = all->player_pos.x;
 	player_coord.y = all->player_pos.y;
-	ray_coord.x = cos(angle);
-	ray_coord.y = sin(angle);
+
+	// Calculer l'angle du rayon en fonction de la direction du joueur
+	ray_angle = all->player_angle + offset_angle;
+	ray_coord.x = cos(ray_angle);
+	ray_coord.y = sin(ray_angle);
+
 	i = -1;
 	while (++i < 500)
 	{
@@ -56,6 +61,7 @@ void	draw_ray(t_all *all, double angle)
 	mlx_put_pixel(all->ray_img, 250, 250, all->color_c);
 	mlx_image_to_window(all->mlx, all->ray_img, 0, 0);
 }
+
 
 void	square(t_all *all, int x, int y, int color)
 {
