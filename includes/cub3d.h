@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 18:48:49 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:13:29 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <math.h>
 
 # define WIDTH 500
 # define HEIGHT 500
@@ -53,6 +54,7 @@ typedef struct s_all
 	int				color_f;
 	mlx_image_t		*img;
 	mlx_image_t		*player_img;
+	mlx_image_t		*ray_img;
 }					t_all;
 
 // PARSING
@@ -77,10 +79,13 @@ void				free_tab(char **tab);
 
 // RENDER
 void				draw_map(t_all *all);
-void	square(t_all *all, int x, int y, int color);
+void				square(t_all *all, int x, int y, int color);
+void				draw_ray(t_all *all, double angle);
+void				clear_ray(t_all *all);
+
 
 // PLAYER
-void event_listener(void *param);
+void 				event_listener(void *param);
 
 
 #endif

@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 18:20:00 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:14:59 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	clear_ray(t_all *all)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < HEIGHT)
+		{
+			mlx_put_pixel(all->ray_img, i, j, 0x000000);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_ray(t_all *all, double angle)
+{
+	t_coord	player_coord;
+	t_coord	ray_coord;
+	int		map_x;
+	int		map_y;
+	int		i;
+
+	player_coord.x = all->player_pos.x;
+	player_coord.y = all->player_pos.y;
+	ray_coord.x = cos(angle);
+	ray_coord.y = sin(angle);
+	i = -1;
+	while (++i < 500)
+	{
+		player_coord.x += ray_coord.x;
+		player_coord.y += ray_coord.y;
+		map_x = (int)(player_coord.x / TILE_SIZE);
+		map_y = (int)(player_coord.y / TILE_SIZE);
+		if (all->map[map_y][map_x] == '1')
+			break ;
+		mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
+	}
+	mlx_put_pixel(all->ray_img, 250, 250, all->color_c);
+	mlx_image_to_window(all->mlx, all->ray_img, 0, 0);
+}
 
 void	square(t_all *all, int x, int y, int color)
 {
@@ -25,7 +70,10 @@ void	square(t_all *all, int x, int y, int color)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			mlx_put_pixel(square, i, j, color);
+			if (i == 0 || i == TILE_SIZE - 1 || j == 0 || j == TILE_SIZE - 1)
+				mlx_put_pixel(square, i, j, 0x000000);
+			else
+				mlx_put_pixel(square, i, j, color);
 			j++;
 		}
 		i++;
