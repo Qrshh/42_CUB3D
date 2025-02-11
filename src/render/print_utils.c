@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 22:25:50 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 22:42:28 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	draw_ray(t_all *all, double offset_angle, int x)
 		map_y = (int)(player_coord.y / TILE_SIZE);
 		if (all->map[map_y][map_x] == '1')
 			break ;
-		mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
+		// mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
 	}
 
 	double	distance;
@@ -166,5 +166,5 @@ void	draw_map(t_all *all)
 		}
 		i++;
 	}
-	mlx_image_to_window(all->mlx, all->img, all->player_pos.x, all->player_pos.y);
+	// mlx_image_to_window(all->mlx, all->img, all->player_pos.x, all->player_pos.y);
 }
