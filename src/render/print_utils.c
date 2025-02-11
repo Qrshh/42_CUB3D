@@ -3,30 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 19:33:13 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:18:03 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	clear_ray(t_all *all)
+void	draw_fov(t_all *all)
 {
-	int	i;
-	int	j;
+	double	start_angle;
+	double 	end_angle;
+	double 	step;
+	double	angle;
 
-	i = 0;
-	while (i < WIDTH)
+	start_angle = all->player_angle - (FOV / 2);
+	end_angle = all->player_angle + (FOV / 2);
+	step = FOV / WIDTH;
+	angle = start_angle;
+	if (!all->ray_img)
 	{
-		j = 0;
-		while (j < HEIGHT)
-		{
-			mlx_put_pixel(all->ray_img, i, j, 0x000000);
-			j++;
-		}
-		i++;
+		all->ray_img = mlx_new_image(all->mlx, WIDTH, HEIGHT);
+		mlx_image_to_window(all->mlx, all->ray_img, 0, 0);
+	}
+	else
+		ft_bzero(all->ray_img->pixels, WIDTH * HEIGHT * 4);
+	while (angle <= end_angle)
+	{
+		draw_ray(all, angle);
+		angle += step;
 	}
 }
 
@@ -43,7 +50,7 @@ void	draw_ray(t_all *all, double offset_angle)
 	player_coord.y = all->player_pos.y;
 
 	// Calculer l'angle du rayon en fonction de la direction du joueur
-	ray_angle = all->player_angle + offset_angle;
+	ray_angle = (all->player_angle + offset_angle);
 	ray_coord.x = cos(ray_angle);
 	ray_coord.y = sin(ray_angle);
 
@@ -58,8 +65,6 @@ void	draw_ray(t_all *all, double offset_angle)
 			break ;
 		mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
 	}
-	mlx_put_pixel(all->ray_img, 250, 250, all->color_c);
-	mlx_image_to_window(all->mlx, all->ray_img, 0, 0);
 }
 
 

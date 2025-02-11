@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 19:43:36 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:17:06 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define MOV_SPEED 1
 # define ROT_SPEED 0.05
 # define TILE_SIZE 16
+# define FOV (70 * (M_PI / 180.0))
 
 typedef struct s_coord
 {
@@ -81,7 +82,7 @@ void				free_tab(char **tab);
 void				draw_map(t_all *all);
 void				square(t_all *all, int x, int y, int color);
 void				draw_ray(t_all *all, double angle);
-void				clear_ray(t_all *all);
+void				draw_fov(t_all *all);
 
 // PLAYER
 void				event_listener(void *param);

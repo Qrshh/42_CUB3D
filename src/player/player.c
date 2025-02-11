@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 19:43:24 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:01:11 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ void	event_listener(void *param)
 		left(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 		right(all);
-	clear_ray(all);
-	draw_ray(all, 0);
+	draw_fov(all); // Si ca lag trop faut bouger ca dans les touches
 }
 
 void	fov_mooves(void *param)
