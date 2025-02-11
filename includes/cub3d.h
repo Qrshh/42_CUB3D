@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 20:17:06 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 21:37:52 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # define WIDTH 500
 # define HEIGHT 500
 
-# define MOV_SPEED 1
+# define MOV_SPEED 0.5
 # define ROT_SPEED 0.05
 # define TILE_SIZE 16
+# define COLLISION_MARGIN 5
 # define FOV (70 * (M_PI / 180.0))
 
 typedef struct s_coord
@@ -85,6 +86,7 @@ void				draw_ray(t_all *all, double angle);
 void				draw_fov(t_all *all);
 
 // PLAYER
+void				init_player(t_all **all, int i, int j);
 void				event_listener(void *param);
 void				fov_mooves(void *param);
 

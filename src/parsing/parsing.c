@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:24:24 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 19:34:39 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:45:18 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,7 @@ void	init_player_position(t_all **all)
 				|| ((*all)->map[i][j]) == 'S' || ((*all)->map[i][j] == 'W'))
 			{
 				found = 1;
-				(*all)->player_pos.x = (j) * TILE_SIZE; //taille en pixel
-				(*all)->player_pos.y = (i) * TILE_SIZE;
-				(*all)->starting_dir = (*all)->map[i][j];
-				(*all)->player_angle = M_PI / 2;
-				(*all)->map[i][j] = '0';
+				init_player(all, i, j);
 				break ;
 			}
 		}

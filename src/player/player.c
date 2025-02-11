@@ -3,78 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 20:01:11 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/11 21:52:34 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	up(t_all *all)
+void move_forward(t_all *all)
 {
-	int	next_i;
-	int	j;
+    double next_x = all->player_pos.x - cos(all->player_angle) * MOV_SPEED;
+    double next_y = all->player_pos.y - sin(all->player_angle) * MOV_SPEED;
+    int map_x = (int)((next_x - COLLISION_MARGIN * cos(all->player_angle)) / TILE_SIZE);
+    int map_y = (int)((next_y - COLLISION_MARGIN * sin(all->player_angle)) / TILE_SIZE);
 
-	next_i = (all->player_pos.y - MOV_SPEED) / TILE_SIZE;
-	j = all->player_pos.x / TILE_SIZE;
-	if (all->map[next_i][j] != '1')
-	{
-		all->player_pos.y -= MOV_SPEED;
-		all->img->instances[0].y -= MOV_SPEED;
-		printf("%f : %f\n", all->player_pos.x / TILE_SIZE, all->player_pos.y
-			/ TILE_SIZE);
-	}
+    if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+        all->player_pos.y = next_y;
+    if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+        all->player_pos.x = next_x;
+
+    all->img->instances[0].x = all->player_pos.x;
+    all->img->instances[0].y = all->player_pos.y;
 }
 
-void	down(t_all *all)
+void move_backward(t_all *all)
 {
-	int	next_i;
-	int	j;
+	double next_x = all->player_pos.x + cos(all->player_angle) * MOV_SPEED;
+    double next_y = all->player_pos.y + sin(all->player_angle) * MOV_SPEED;
+    int map_x = (int)((next_x + COLLISION_MARGIN * cos(all->player_angle)) / TILE_SIZE);
+    int map_y = (int)((next_y + COLLISION_MARGIN * sin(all->player_angle)) / TILE_SIZE);
 
-	next_i = (all->player_pos.y + MOV_SPEED) / TILE_SIZE;
-	j = all->player_pos.x / TILE_SIZE;
-	if (all->map[next_i][j] != '1')
-	{
-		all->player_pos.y += MOV_SPEED;
-		all->img->instances[0].y += MOV_SPEED;
-		printf("%f : %f\n", all->player_pos.x / TILE_SIZE, all->player_pos.y
-			/ TILE_SIZE);
-	}
+    if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+        all->player_pos.y = next_y;
+    if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+        all->player_pos.x = next_x;
+
+    all->img->instances[0].x = all->player_pos.x;
+    all->img->instances[0].y = all->player_pos.y;
 }
 
-void	left(t_all *all)
+void move_left(t_all *all)
 {
-	int	i;
-	int	next_j;
+    double next_x = all->player_pos.x - sin(all->player_angle) * MOV_SPEED;
+    double next_y = all->player_pos.y + cos(all->player_angle) * MOV_SPEED;
+    int map_x = (int)((next_x - COLLISION_MARGIN * sin(all->player_angle)) / TILE_SIZE);
+    int map_y = (int)((next_y + COLLISION_MARGIN * cos(all->player_angle)) / TILE_SIZE);
 
-	i = all->player_pos.y / TILE_SIZE;
-	next_j = (all->player_pos.x + MOV_SPEED) / TILE_SIZE;
-	if (all->map[i][next_j] != '1')
-	{
-		all->player_pos.x += MOV_SPEED;
-		all->img->instances[0].x += MOV_SPEED;
-		printf("%f : %f\n", all->player_pos.x / TILE_SIZE, all->player_pos.y
-			/ TILE_SIZE);
-	}
+    if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+        all->player_pos.y = next_y;
+    if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+        all->player_pos.x = next_x;
+
+    all->img->instances[0].x = all->player_pos.x;
+    all->img->instances[0].y = all->player_pos.y;
 }
 
-void	right(t_all *all)
+void move_right(t_all *all)
 {
-	int	i;
-	int	next_j;
+    double next_x = all->player_pos.x + sin(all->player_angle) * MOV_SPEED;
+    double next_y = all->player_pos.y - cos(all->player_angle) * MOV_SPEED;
+    int map_x = (int)((next_x + COLLISION_MARGIN * sin(all->player_angle)) / TILE_SIZE);
+    int map_y = (int)((next_y - COLLISION_MARGIN * cos(all->player_angle)) / TILE_SIZE);
 
-	i = all->player_pos.y / TILE_SIZE;
-	next_j = (all->player_pos.x - MOV_SPEED) / TILE_SIZE;
-	if (all->map[i][next_j] != '1')
-	{
-		all->player_pos.x -= MOV_SPEED;
-		all->img->instances[0].x -= MOV_SPEED;
-		printf("%f : %f\n", all->player_pos.x / TILE_SIZE, all->player_pos.y
-			/ TILE_SIZE);
-	}
+    if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+        all->player_pos.y = next_y;
+    if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+        all->player_pos.x = next_x;
+
+    all->img->instances[0].x = all->player_pos.x;
+    all->img->instances[0].y = all->player_pos.y;
 }
+
 
 void rotate_right(t_all *all)
 {
@@ -98,13 +99,13 @@ void	event_listener(void *param)
 	if (mlx_is_key_down(all->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(all->mlx);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_W))
-		up(all);
+		move_forward(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_S))
-		down(all);
+		move_backward(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_D))
-		left(all);
+		move_left(all);
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
-		right(all);
+		move_right(all);
 	draw_fov(all); // Si ca lag trop faut bouger ca dans les touches
 }
 
