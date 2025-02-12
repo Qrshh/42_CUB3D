@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(all->mlx, moove_fw_bw, all);
 	mlx_loop_hook(all->mlx, moove_left_right, all);
 	mlx_loop_hook(all->mlx, fov_mooves, all);
-	mlx_key_hook(all->mlx, toggle_minimap, all);
+	mlx_key_hook(all->mlx, toggle, all);
 	mlx_loop(all->mlx);
 	ft_all_exit(all, NULL);
 }
