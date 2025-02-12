@@ -6,31 +6,57 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:43:56 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 15:17:59 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:00:41 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void moove_fw_bw(void *param)
+void	moove_fw_bw(void *param)
 {
-    t_all *all;
+	t_all	*all;
 
-    all = (t_all *)param;
-    if (mlx_is_key_down(all->mlx, MLX_KEY_W))
+	all = (t_all *)param;
+	all->sprint = false;
+	if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT_SHIFT)
+		&& mlx_is_key_down(all->mlx, MLX_KEY_W))
+	{
+		all->sprint = true;
 		move_forward(all);
+	}
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_W))
+		move_forward(all);
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT_SHIFT)
+		&& mlx_is_key_down(all->mlx, MLX_KEY_S))
+	{
+		all->sprint = true;
+		move_backward(all);
+	}
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_S))
 		move_backward(all);
-	draw_fov(all); // Si ca lag trop faut bouger ca dans les touches
+	draw_fov(all);
 }
 
-void moove_left_right(void *param)
+void	moove_left_right(void *param)
 {
-    t_all *all;
+	t_all	*all;
 
-    all = (t_all *)param;
-    if (mlx_is_key_down(all->mlx, MLX_KEY_D))
+	all = (t_all *)param;
+	all->sprint = false;
+	if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT_SHIFT)
+		&& mlx_is_key_down(all->mlx, MLX_KEY_D))
+	{
+		all->sprint = true;
 		move_left(all);
+	}
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_D))
+		move_left(all);
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT_SHIFT)
+		&& mlx_is_key_down(all->mlx, MLX_KEY_A))
+	{
+		all->sprint = true;
+		move_right(all);
+	}
 	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
 		move_right(all);
 }

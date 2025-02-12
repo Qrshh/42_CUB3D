@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 15:31:57 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:05:19 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(all->mlx, moove_fw_bw, all);
 	mlx_loop_hook(all->mlx, moove_left_right, all);
 	mlx_loop_hook(all->mlx, fov_mooves, all);
-	mlx_key_hook(all->mlx, toggle_minimap, all);
+	mlx_key_hook(all->mlx, toggle, all);
 	mlx_loop(all->mlx);
 	ft_all_exit(all, NULL);
 }
