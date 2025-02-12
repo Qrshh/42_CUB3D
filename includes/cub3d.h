@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 22:04:38 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:42:00 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-
 
 # define MOV_SPEED 5
 # define ROT_SPEED 0.05
@@ -58,7 +57,9 @@ typedef struct s_all
 	mlx_image_t		*img;
 	mlx_image_t		*player_img;
 	mlx_image_t		*ray_img;
+	mlx_image_t		*minimap_img;
 	mlx_image_t		*wall_img;
+	bool			minimap_visible;
 }					t_all;
 
 // PARSING
@@ -86,10 +87,19 @@ void				draw_map(t_all *all);
 void				square(t_all *all, int x, int y, int color);
 void				draw_ray(t_all *all, double offset_angle, int x);
 void				draw_fov(t_all *all);
+void				toggle_minimap(mlx_key_data_t keydata, void *param);
+void				draw_minimap(t_all *all);
+void				create_minimap(t_all *all);
 
 // PLAYER
 void				init_player(t_all **all, int i, int j);
-void				event_listener(void *param);
+void				moove_fw_bw(void *param);
+void				moove_left_right(void *param);
 void				fov_mooves(void *param);
+
+void				move_forward(t_all *all);
+void				move_backward(t_all *all);
+void				move_right(t_all *all);
+void				move_left(t_all *all);
 
 #endif

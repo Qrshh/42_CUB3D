@@ -19,10 +19,10 @@ PARSING_DIR  = parsing/
 PARSING		 = check_map parsing_utils parsing parsing_path parsing_color
 
 RENDER_DIR = render/
-RENDER    = print_utils
+RENDER    = print_utils minimap
 
 PLAYER_DIR = player/
-PLAYER = player init_player
+PLAYER = player_mooves init_player player_camera
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
