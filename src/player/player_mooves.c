@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_mooves.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 22:41:02 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:27:20 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,45 +77,3 @@ void move_right(t_all *all)
 }
 
 
-void rotate_right(t_all *all)
-{
-    all->player_angle += ROT_SPEED;
-    if (all->player_angle > 2 * M_PI) // Empêcher un dépassement d'angle
-        all->player_angle -= 2 * M_PI;
-}
-
-void rotate_left(t_all *all)
-{
-    all->player_angle -= ROT_SPEED;
-    if (all->player_angle < 0)
-        all->player_angle += 2 * M_PI;
-}
-
-void	event_listener(void *param)
-{
-	t_all	*all;
-
-	all = (t_all *)param;
-	if (mlx_is_key_down(all->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(all->mlx);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_W))
-		move_forward(all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_S))
-		move_backward(all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_D))
-		move_left(all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
-		move_right(all);
-	draw_fov(all); // Si ca lag trop faut bouger ca dans les touches
-}
-
-void	fov_mooves(void *param)
-{
-	t_all *all;
-
-	all = (t_all *)param;
-	if (mlx_is_key_down(all->mlx, MLX_KEY_RIGHT))
-		rotate_right(all);
-	else if (mlx_is_key_down(all->mlx, MLX_KEY_LEFT))
-		rotate_left(all);
-}

@@ -6,11 +6,34 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 20:43:56 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 23:54:26 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:17:59 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void moove_fw_bw(void *param)
+{
+    t_all *all;
+
+    all = (t_all *)param;
+    if (mlx_is_key_down(all->mlx, MLX_KEY_W))
+		move_forward(all);
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_S))
+		move_backward(all);
+	draw_fov(all); // Si ca lag trop faut bouger ca dans les touches
+}
+
+void moove_left_right(void *param)
+{
+    t_all *all;
+
+    all = (t_all *)param;
+    if (mlx_is_key_down(all->mlx, MLX_KEY_D))
+		move_left(all);
+	else if (mlx_is_key_down(all->mlx, MLX_KEY_A))
+		move_right(all);
+}
 
 void	init_player(t_all **all, int i, int j)
 {

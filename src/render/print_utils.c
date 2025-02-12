@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/11 22:42:28 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/12 16:22:26 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	draw_fov(t_all *all)
 		angle += step;
 		x++;
 	}
+	draw_minimap(all);
 }
 
 void	draw_ray(t_all *all, double offset_angle, int x)
@@ -166,5 +167,5 @@ void	draw_map(t_all *all)
 		}
 		i++;
 	}
-	// mlx_image_to_window(all->mlx, all->img, all->player_pos.x, all->player_pos.y);
+	mlx_image_to_window(all->mlx, all->img, all->player_pos.x, all->player_pos.y);
 }
