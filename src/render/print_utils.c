@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/12 16:22:26 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 23:22:43 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,113 @@ void	draw_fov(t_all *all)
 	draw_minimap(all);
 }
 
-void	draw_ray(t_all *all, double offset_angle, int x)
+int	check_wall_face(t_coord player_pos, t_raycast *raycast)
+{
+	if (fmod(raycast->pos_ray.x, TILE_SIZE)
+		< fmod(raycast->pos_ray.y, TILE_SIZE))
+	{
+		if (raycast->pos_ray.x > player_pos.x)
+			return (EAST);
+		else
+			return (WEST);
+	}
+	else
+	{
+		if (raycast->pos_ray.y > player_pos.y)
+			return (SOUTH);
+		else
+			return (NORTH);
+	}
+}
+
+void	calcul_tex(mlx_texture_t **texture_tab, int wall_face, t_raycast *raycast, int y)
+{
+	int		wall_x;
+	int		d;
+
+	if (wall_face == 0 || wall_face == 1)
+		wall_x = fmod(raycast->pos_ray.y, TILE_SIZE) / TILE_SIZE;
+	else
+		wall_x = fmod(raycast->pos_ray.x, TILE_SIZE) / TILE_SIZE;
+	raycast->texture_coord.x = wall_x * texture_tab[wall_face]->width;
+	d = (y - raycast->y_start) * 256 - HEIGHT * 128 + raycast->wall_height * 128;
+	raycast->texture_coord.y = (d * texture_tab[wall_face]->height) / (raycast->wall_height * 256);
+}
+
+void	calculate_ray(t_all *all, t_raycast *raycast, t_coord pos_ray, double angle)
+{
+	raycast->pos_ray = pos_ray;
+	raycast->distance = sqrt(pow(pos_ray.x - all->player_pos.x, 2)
+		+ pow(pos_ray.y - all->player_pos.y, 2));
+	raycast->fish_eye_correction = raycast->distance * cos(angle - all->player_angle);
+	raycast->projected_wall_height = (WIDTH / 2) / tan(FOV / 2);
+	raycast->wall_height = (TILE_SIZE * raycast->projected_wall_height) / raycast->fish_eye_correction;
+	raycast->y_start = (HEIGHT / 2) - (raycast->wall_height / 2);
+	raycast->y_end = (HEIGHT / 2) + (raycast->wall_height / 2);
+}
+
+void	calculate_color(mlx_texture_t **texture_tab, int wall_face, t_raycast *raycast)
+{
+	if (raycast->texture_coord.x < 0) 
+		raycast->texture_coord.x = 0;
+    if (raycast->texture_coord.y < 0) 
+		raycast->texture_coord.y = 0;
+    if (raycast->texture_coord.x >= texture_tab[wall_face]->width) 
+		raycast->texture_coord.x = texture_tab[wall_face]->width - 1;
+    if (raycast->texture_coord.y >= texture_tab[wall_face]->height)
+		raycast->texture_coord.y = texture_tab[wall_face]->height - 1;
+	raycast->tex_index = ((raycast->texture_coord.y + raycast->texture_coord.x
+							) * texture_tab[wall_face]->bytes_per_pixel);
+	raycast->pixel = &texture_tab[wall_face]->pixels[raycast->tex_index];
+	raycast->color = (raycast->pixel[0] << 24) | (raycast->pixel[1] << 16) | (raycast->pixel[2] << 8) | raycast->pixel[3];
+}
+
+void	draw_wall(t_all *all, t_coord pos_ray, double angle, int x)
+{
+	t_raycast	raycast;
+	int			wall_face;
+	int			y;
+
+	calculate_ray(all, &raycast, pos_ray, angle);
+	wall_face = check_wall_face(all->player_pos, &raycast);
+	// if (raycast.y_start < 0)
+	// 	raycast.y_start = 0;
+	// if (raycast.y_end >= HEIGHT)
+	// 	raycast.y_end = HEIGHT - 1;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		if (y < raycast.y_start)
+			mlx_put_pixel(all->wall_img, x, y, all->color_c);
+		else if (y > raycast.y_end)
+			mlx_put_pixel(all->wall_img, x, y, all->color_f);
+		else
+		{
+			calcul_tex(all->tab_textures, wall_face, &raycast, y);
+			calculate_color(all->tab_textures, wall_face, &raycast);
+			mlx_put_pixel(all->wall_img, x, y, raycast.color);
+		}
+		y++;
+	}
+}
+
+
+// FOR DEBUG
+// mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
+void	draw_ray(t_all *all, double angle, int x)
 {
 	t_coord	player_coord;
 	t_coord	ray_coord;
 	int		map_x;
 	int		map_y;
 	int		i;
-	double	ray_angle;
 
 	player_coord.x = all->player_pos.x;
 	player_coord.y = all->player_pos.y;
-
-	// Calculer l'angle du rayon en fonction de la direction du joueur
-	ray_angle = (offset_angle);
-	ray_coord.x = cos(ray_angle);
-	ray_coord.y = sin(ray_angle);
-
+	ray_coord.x = cos(angle);
+	ray_coord.y = sin(angle);
 	i = -1;
-	while (++i < 500)
+	while (++i < RENDER_DISTANCE)
 	{
 		player_coord.x += ray_coord.x;
 		player_coord.y += ray_coord.y;
@@ -76,44 +164,8 @@ void	draw_ray(t_all *all, double offset_angle, int x)
 		map_y = (int)(player_coord.y / TILE_SIZE);
 		if (all->map[map_y][map_x] == '1')
 			break ;
-		// mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
 	}
-
-	double	distance;
-	double	wall_height;
-	double	fish_eye;
-	double	projected_wall_height;
-	int		y_start;
-	int		y_end;
-	int		y;
-
-	distance = sqrt(pow(player_coord.x - all->player_pos.x, 2)
-		+ pow(player_coord.y - all->player_pos.y, 2));
-	
-	fish_eye = distance * cos(ray_angle - all->player_angle);
-	
-	projected_wall_height = (WIDTH / 2) / tan(FOV / 2);
-	wall_height = (TILE_SIZE * projected_wall_height) / fish_eye;
-	
-	// if (wall_height > HEIGHT)
-	// 	wall_height = HEIGHT;
-	y_start = (HEIGHT / 2) - (wall_height / 2);
-	y_end = (HEIGHT / 2) + (wall_height / 2);
-	// if (y_start < 0)
-	// 	y_start = 0;
-	// if (y_end >= HEIGHT)
-	// 	y_end = HEIGHT - 1;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		if (y < y_start)
-			mlx_put_pixel(all->wall_img, x, y, all->color_c); // Couleur du ciel
-		else if (y > y_end)
-			mlx_put_pixel(all->wall_img, x, y, all->color_f); // Couleur du sol
-		else
-			mlx_put_pixel(all->wall_img, x, y, 0x87CEEB); // Couleur du mur
-		y++;
-	}
+	draw_wall(all, player_coord, angle, x);
 }
 
 

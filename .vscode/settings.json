@@ -8,7 +8,8 @@
 		"string": "c",
 		"type_traits": "c",
 		"ranges": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"bitset": "c"
 	},
 	"cmake.sourceDirectory": "/home/mosmont/Desktop/all_projects/42_CUB3D/includes/MLX42"
 }
