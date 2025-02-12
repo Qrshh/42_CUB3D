@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 19:06:07 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:52:25 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define HEIGHT 1080
 
 # define MOV_SPEED 5
+# define BIG_SPEED 2
 # define ROT_SPEED 0.05
 # define TILE_SIZE 64
 # define COLLISION_MARGIN 5
@@ -62,6 +63,7 @@ typedef struct s_all
 	mlx_image_t		*wall_img;
 	bool			minimap_visible;
 	bool			fov_mouse;
+	bool			sprint;
 }					t_all;
 
 // PARSING
