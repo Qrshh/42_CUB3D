@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/11 20:52:18 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:28:39 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	init_ptr(t_all **all)
 	(*all)->plane_pos.x = 0;
 	(*all)->plane_pos.y = 0;
 	(*all)->starting_dir = 0;
+	(*all)->fov_mouse = false;
 	(*all)->f = 0;
 	(*all)->c = 0;
 	(*all)->no = 0;
