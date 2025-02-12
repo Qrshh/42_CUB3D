@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 20:52:25 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 23:23:49 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+# define RENDER_DISTANCE 1000
 # define MOV_SPEED 5
 # define BIG_SPEED 2
 # define ROT_SPEED 0.05
@@ -31,11 +32,31 @@
 # define SENS 0.001
 # define FOV (70 * (M_PI / 180.0))
 
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
+
 typedef struct s_coord
 {
 	double			x;
 	double			y;
 }					t_coord;
+
+typedef	struct s_raycast
+{
+	t_coord			pos_ray;
+	double			distance;
+	double			wall_height;
+	double			fish_eye_correction;
+	double			projected_wall_height;
+	int				y_start;
+	int				y_end;
+	t_coord			texture_coord;
+	int				tex_index;
+	uint8_t			*pixel;
+	int				color;
+}					t_raycast;
 
 typedef struct s_all
 {
