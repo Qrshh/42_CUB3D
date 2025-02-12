@@ -22,7 +22,7 @@ RENDER_DIR = render/
 RENDER    = print_utils minimap
 
 PLAYER_DIR = player/
-PLAYER = player_mooves init_player player_camera
+PLAYER = player_mooves init_player player_camera player_toggle
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))

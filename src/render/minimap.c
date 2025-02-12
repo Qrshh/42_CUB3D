@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:24:23 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 18:35:08 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:51:43 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	draw_minimap(t_all *all)
 	if (!all->minimap_visible)
 		return ;
 	int map_x, map_y;
-	int tile_size = 10; // Taille des cases de la minimap
-	int offset_x = 10;  // Position de la minimap sur l'écran
+	int tile_size = 10;
+	int offset_x = 10;
 	offset_y = 10;
-	// Si l'image existe déjà, ne pas la recréer
 	if (!all->minimap_img)
 		all->minimap_img = mlx_new_image(all->mlx, 1000, 1000);
 	for (map_y = 0; all->map[map_y]; map_y++)
@@ -43,7 +42,6 @@ void	draw_minimap(t_all *all)
 			}
 		}
 	}
-	// Dessiner le joueur en rouge
 	player_x = offset_x + (all->player_pos.x / TILE_SIZE) * tile_size;
 	player_y = offset_y + (all->player_pos.y / TILE_SIZE) * tile_size;
 	for (int i = 0; i < tile_size / 2; i++)
@@ -57,18 +55,3 @@ void	draw_minimap(t_all *all)
 	mlx_image_to_window(all->mlx, all->minimap_img, 10, 10);
 }
 
-void	toggle_minimap(mlx_key_data_t keydata, void *param)
-{
-	t_all	*all;
-
-	all = (t_all *)param;
-	if (keydata.key == MLX_KEY_M && keydata.action == MLX_RELEASE)
-	{
-		all->minimap_visible = !all->minimap_visible;
-		if (!all->minimap_visible && all->minimap_img)
-		{
-			mlx_delete_image(all->mlx, all->minimap_img);
-			all->minimap_img = NULL; // Éviter d'accéder à une image supprimée
-		}
-	}
-}

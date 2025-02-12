@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 18:31:03 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:51:56 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ int	main(int ac, char **av)
 	mlx_loop_hook(all->mlx, escape, all);
 	mlx_loop_hook(all->mlx, moove_fw_bw, all);
 	mlx_loop_hook(all->mlx, moove_left_right, all);
-	// mlx_set_cursor_mode(all->mlx, MLX_MOUSE_DISABLED);
-	// mlx_cursor_hook(all->mlx, mouse_moove, all);
 	mlx_loop_hook(all->mlx, fov_mooves, all);
-	mlx_key_hook(all->mlx, toggle_minimap, all);
-	mlx_key_hook(all->mlx, toggle_mouse, all);
+	mlx_key_hook(all->mlx, toggle, all);
 	mlx_loop(all->mlx);
 	ft_all_exit(all, NULL);
 }
