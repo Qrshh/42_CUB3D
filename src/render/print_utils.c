@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/12 23:22:43 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/13 02:11:52 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,39 +50,6 @@ void	draw_fov(t_all *all)
 	draw_minimap(all);
 }
 
-int	check_wall_face(t_coord player_pos, t_raycast *raycast)
-{
-	if (fmod(raycast->pos_ray.x, TILE_SIZE)
-		< fmod(raycast->pos_ray.y, TILE_SIZE))
-	{
-		if (raycast->pos_ray.x > player_pos.x)
-			return (EAST);
-		else
-			return (WEST);
-	}
-	else
-	{
-		if (raycast->pos_ray.y > player_pos.y)
-			return (SOUTH);
-		else
-			return (NORTH);
-	}
-}
-
-void	calcul_tex(mlx_texture_t **texture_tab, int wall_face, t_raycast *raycast, int y)
-{
-	int		wall_x;
-	int		d;
-
-	if (wall_face == 0 || wall_face == 1)
-		wall_x = fmod(raycast->pos_ray.y, TILE_SIZE) / TILE_SIZE;
-	else
-		wall_x = fmod(raycast->pos_ray.x, TILE_SIZE) / TILE_SIZE;
-	raycast->texture_coord.x = wall_x * texture_tab[wall_face]->width;
-	d = (y - raycast->y_start) * 256 - HEIGHT * 128 + raycast->wall_height * 128;
-	raycast->texture_coord.y = (d * texture_tab[wall_face]->height) / (raycast->wall_height * 256);
-}
-
 void	calculate_ray(t_all *all, t_raycast *raycast, t_coord pos_ray, double angle)
 {
 	raycast->pos_ray = pos_ray;
@@ -93,20 +60,69 @@ void	calculate_ray(t_all *all, t_raycast *raycast, t_coord pos_ray, double angle
 	raycast->wall_height = (TILE_SIZE * raycast->projected_wall_height) / raycast->fish_eye_correction;
 	raycast->y_start = (HEIGHT / 2) - (raycast->wall_height / 2);
 	raycast->y_end = (HEIGHT / 2) + (raycast->wall_height / 2);
+	// printf("raycast->y_start = %d\n", raycast->y_start);
+	// printf("raycast->y_end = %d\n", raycast->y_end);
+}
+
+int	check_wall_face(t_all *all, t_raycast *raycast)
+{
+	if (fmod(raycast->pos_ray.x, TILE_SIZE)
+		> fmod(raycast->pos_ray.y, TILE_SIZE))
+	{
+		if (all->plane_pos.x > 0)
+			return (WEST);
+		else
+			return (EAST);
+	}
+	else
+	{
+		if (all->plane_pos.y < 0)
+			return (SOUTH);
+		else
+			return (NORTH);
+	}
+}
+
+
+
+void	calcul_tex(mlx_texture_t **texture_tab, int wall_face, t_raycast *raycast, int y)
+{
+	double	wall_x;
+	// int		d;
+
+	// printf("raycast->pos_ray.x = %f\n", raycast->pos_ray.x);
+	// printf("raycast->pos_ray.y = %f\n", raycast->pos_ray.y);
+	// 
+	// raycast->texture_coord.x = fmodf(raycast->pos_ray.x * (texture_tab[wall_face]->width / TILE_SIZE), texture_tab[wall_face]->width);
+	if (wall_face == 0 || wall_face == 1)
+		wall_x = (fmod(raycast->pos_ray.x, TILE_SIZE) / TILE_SIZE);
+	else
+		wall_x = (fmod(raycast->pos_ray.y, TILE_SIZE) / TILE_SIZE);
+	// printf("Wall_x = %f\n", wall_x);
+	// printf("y = %d\n", y);
+	(void)y;
+	raycast->texture_coord.x = (wall_x * texture_tab[wall_face]->width);
+	// d = (y - raycast->y_start) * 256 - HEIGHT * 128 + raycast->wall_height * 128;
+	raycast->texture_coord.y = (y - raycast->y_start) * (texture_tab[wall_face]->height / raycast->wall_height);
+	// if (raycast->texture_coord.y < 0)
+	// 	raycast->texture_coord.y = 0;
+	// printf("raycast->texture_coord.x = %f\n", raycast->texture_coord.x);
+	// printf("raycast->texture_coord.y = %f\n\n", raycast->texture_coord.y);
 }
 
 void	calculate_color(mlx_texture_t **texture_tab, int wall_face, t_raycast *raycast)
 {
-	if (raycast->texture_coord.x < 0) 
-		raycast->texture_coord.x = 0;
-    if (raycast->texture_coord.y < 0) 
-		raycast->texture_coord.y = 0;
-    if (raycast->texture_coord.x >= texture_tab[wall_face]->width) 
-		raycast->texture_coord.x = texture_tab[wall_face]->width - 1;
-    if (raycast->texture_coord.y >= texture_tab[wall_face]->height)
-		raycast->texture_coord.y = texture_tab[wall_face]->height - 1;
-	raycast->tex_index = ((raycast->texture_coord.y + raycast->texture_coord.x
-							) * texture_tab[wall_face]->bytes_per_pixel);
+	// if (raycast->texture_coord.x < 0) 
+	// 	raycast->texture_coord.x = 0;
+    // if (raycast->texture_coord.y < 0) 
+	// 	raycast->texture_coord.y = 0;
+    // if (raycast->texture_coord.x >= texture_tab[wall_face]->width) 
+	// 	raycast->texture_coord.x = texture_tab[wall_face]->width - 1;
+    // if (raycast->texture_coord.y >= texture_tab[wall_face]->height)
+	// 	raycast->texture_coord.y = texture_tab[wall_face]->height - 1;
+	raycast->tex_index = ((((int)raycast->texture_coord.y * (int)texture_tab[wall_face]->width + (int)raycast->texture_coord.x)
+							)* texture_tab[wall_face]->bytes_per_pixel);
+	// printf("raycast->tex_index = %d\n", raycast->tex_index);
 	raycast->pixel = &texture_tab[wall_face]->pixels[raycast->tex_index];
 	raycast->color = (raycast->pixel[0] << 24) | (raycast->pixel[1] << 16) | (raycast->pixel[2] << 8) | raycast->pixel[3];
 }
@@ -118,7 +134,8 @@ void	draw_wall(t_all *all, t_coord pos_ray, double angle, int x)
 	int			y;
 
 	calculate_ray(all, &raycast, pos_ray, angle);
-	wall_face = check_wall_face(all->player_pos, &raycast);
+	wall_face = check_wall_face(all, &raycast);
+	// printf("wall_face = %d\n", wall_face);
 	// if (raycast.y_start < 0)
 	// 	raycast.y_start = 0;
 	// if (raycast.y_end >= HEIGHT)
@@ -150,6 +167,7 @@ void	draw_ray(t_all *all, double angle, int x)
 	int		map_x;
 	int		map_y;
 	int		i;
+	(void)x;
 
 	player_coord.x = all->player_pos.x;
 	player_coord.y = all->player_pos.y;
@@ -164,6 +182,7 @@ void	draw_ray(t_all *all, double angle, int x)
 		map_y = (int)(player_coord.y / TILE_SIZE);
 		if (all->map[map_y][map_x] == '1')
 			break ;
+		// mlx_put_pixel(all->ray_img, (int)player_coord.x, (int)player_coord.y, all->color_c);
 	}
 	draw_wall(all, player_coord, angle, x);
 }

@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 23:23:49 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/13 02:15:44 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1000
+# define HEIGHT 800
 
 # define RENDER_DISTANCE 1000
 # define MOV_SPEED 5
@@ -30,7 +30,7 @@
 # define TILE_SIZE 64
 # define COLLISION_MARGIN 5
 # define SENS 0.001
-# define FOV (70 * (M_PI / 180.0))
+# define FOV (60 * (M_PI / 180.0))
 
 # define NORTH 0
 # define SOUTH 1
@@ -56,6 +56,9 @@ typedef	struct s_raycast
 	int				tex_index;
 	uint8_t			*pixel;
 	int				color;
+	int				hit_vertical;
+	int 			step_x;
+	int 			step_y;
 }					t_raycast;
 
 typedef struct s_all
