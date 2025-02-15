@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/13 02:15:44 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/15 19:51:33 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,23 @@ typedef struct s_coord
 	double			y;
 }					t_coord;
 
+typedef struct s_coord_int
+{
+    int             x;
+    int             y;
+}                   t_coord_int;
+
+typedef struct s_dda
+{
+    t_coord         ray_dir;
+    t_coord         side_dist;
+    t_coord         delta_dist;
+    t_coord         step;
+    t_coord_int     map;
+    int hit;
+    int side;
+}               t_dda;
+
 typedef	struct s_raycast
 {
 	t_coord			pos_ray;
@@ -59,6 +76,9 @@ typedef	struct s_raycast
 	int				hit_vertical;
 	int 			step_x;
 	int 			step_y;
+	double			perp_wall_dist;
+	int				wall_face;
+	t_dda			dda;
 }					t_raycast;
 
 typedef struct s_all
