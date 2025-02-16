@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 23:23:49 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/16 01:43:53 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1000
+# define HEIGHT 800
 
-# define RENDER_DISTANCE 1000
 # define MOV_SPEED 5
 # define BIG_SPEED 2
 # define ROT_SPEED 0.05
@@ -43,6 +42,23 @@ typedef struct s_coord
 	double			y;
 }					t_coord;
 
+typedef struct s_coord_int
+{
+    int             x;
+    int             y;
+}                   t_coord_int;
+
+typedef struct s_dda
+{
+    t_coord         ray_dir;
+    t_coord         side_dist;
+    t_coord         delta_dist;
+    t_coord         step;
+    t_coord_int     map;
+    int hit;
+    int side;
+}               t_dda;
+
 typedef	struct s_raycast
 {
 	t_coord			pos_ray;
@@ -52,10 +68,16 @@ typedef	struct s_raycast
 	double			projected_wall_height;
 	int				y_start;
 	int				y_end;
-	t_coord			texture_coord;
+	t_coord_int		texture_coord;
 	int				tex_index;
 	uint8_t			*pixel;
 	int				color;
+	int				hit_vertical;
+	int 			step_x;
+	int 			step_y;
+	double			perp_wall_dist;
+	int				wall_face;
+	t_dda			dda;
 }					t_raycast;
 
 typedef struct s_all
