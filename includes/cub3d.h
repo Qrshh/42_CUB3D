@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/15 19:51:33 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/16 01:43:53 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@
 # define WIDTH 1000
 # define HEIGHT 800
 
-# define RENDER_DISTANCE 1000
 # define MOV_SPEED 5
 # define BIG_SPEED 2
 # define ROT_SPEED 0.05
 # define TILE_SIZE 64
 # define COLLISION_MARGIN 5
 # define SENS 0.001
-# define FOV (60 * (M_PI / 180.0))
+# define FOV (70 * (M_PI / 180.0))
 
 # define NORTH 0
 # define SOUTH 1
@@ -69,7 +68,7 @@ typedef	struct s_raycast
 	double			projected_wall_height;
 	int				y_start;
 	int				y_end;
-	t_coord			texture_coord;
+	t_coord_int		texture_coord;
 	int				tex_index;
 	uint8_t			*pixel;
 	int				color;
