@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/16 01:43:53 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 00:23:17 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TILE_SIZE 64
 # define COLLISION_MARGIN 5
 # define SENS 0.001
-# define FOV (70 * (M_PI / 180.0))
+# define FOV 66
 
 # define NORTH 0
 # define SOUTH 1
@@ -63,7 +63,7 @@ typedef	struct s_raycast
 {
 	t_coord			pos_ray;
 	double			distance;
-	double			wall_height;
+	int				wall_height;
 	double			fish_eye_correction;
 	double			projected_wall_height;
 	int				y_start;
@@ -82,6 +82,7 @@ typedef	struct s_raycast
 
 typedef struct s_all
 {
+	double			fov;
 	t_coord			player_pos;
 	double			player_angle;
 	t_coord			plane_pos;
@@ -130,11 +131,20 @@ void				free_all(t_all *all);
 void				free_tab(char **tab);
 
 // RENDER
-void				draw_map(t_all *all);
-void				square(t_all *all, int x, int y, int color);
 void				draw_ray(t_all *all, double offset_angle, int x);
 void				draw_fov(t_all *all);
 void				draw_minimap(t_all *all);
+
+void				calculate_color(mlx_texture_t **texture_tab,
+						t_raycast *raycast);
+void				calcul_tex(t_all *all, t_raycast *raycast, int y);
+void				check_wall_face(t_raycast *raycast);
+
+void				dda_loop(t_dda *dda, char **map);
+void				calculate_step(t_all *all, t_dda *dda);
+
+// UTILS RENDER
+void				refresh_image(mlx_t *mlx, mlx_image_t **image);
 
 // PLAYER
 void				init_player(t_all **all, int i, int j);
