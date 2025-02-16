@@ -4,7 +4,7 @@ SRC_DIR     = src/
 OBJ_DIR     = obj/
 
 CC          = gcc
-CFLAGS      = -Wall -Wextra -Werror -g3
+CFLAGS      = #-Wall -Wextra -Werror -g3
 PRFLAGS     = -L/opt/homebrew/lib -ldl -lglfw -pthread -lm
 RM          = rm -rf
 
@@ -19,7 +19,7 @@ PARSING_DIR  = parsing/
 PARSING		 = check_map parsing_utils parsing parsing_path parsing_color
 
 RENDER_DIR = render/
-RENDER    = print_utils minimap
+RENDER    = minimap dda raycast render_utils textures
 
 PLAYER_DIR = player/
 PLAYER = player_mooves init_player player_camera player_toggle
