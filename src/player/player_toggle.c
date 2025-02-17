@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_toggle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:04:12 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 20:28:08 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 21:24:46 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void toggle_door(t_all *all)
 	}
 }
 
-
 void	toggle(mlx_key_data_t keydata, void *param)
 {
 	t_all	*all;
@@ -88,4 +87,6 @@ void	toggle(mlx_key_data_t keydata, void *param)
 		toggle_mouse_fov(all);
 	else if (keydata.key == MLX_KEY_E && keydata.action == MLX_RELEASE)
 		toggle_door(all);
+	else if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
+		toggle_nightvision(all);
 }

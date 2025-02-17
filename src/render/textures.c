@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 20:17:38 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 22:44:45 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,34 @@ void	calculate_ray_light(t_raycast *raycast, double player_angle,
 	flash_light->angle_factor = (flash_light->scalar_product + 1.0) / 2.0;
 }
 
-void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light)
+void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light, bool night_vision)
 {
-	uint8_t			r;
-	uint8_t			g;
-	uint8_t			b;
+	t_rgb	rgb;
+	uint8_t	gray;
 
-	r = (uint8_t)(raycast->pixel[0] * flash_light->light_factor);
-	g = (uint8_t)(raycast->pixel[1] * flash_light->light_factor);
-	b = (uint8_t)(raycast->pixel[2] * flash_light->light_factor);
-	raycast->color = (r << 24) | (g << 16) | (b << 8) | raycast->pixel[3];
+	if (night_vision)
+	{
+		rgb.r = (uint8_t)(raycast->pixel[0] * flash_light->light_factor * 0.5);
+		rgb.g = (uint8_t)(raycast->pixel[1] * flash_light->light_factor * 2);
+		rgb.b = (uint8_t)(raycast->pixel[2] * flash_light->light_factor * 0.5);
+		if (rgb.r > 200 && rgb.b > 200)
+		{
+			rgb.r = 255;
+			rgb.r = 255;
+			rgb.g = 255;
+		}
+	}
+	else
+	{
+		rgb.r = (uint8_t)(raycast->pixel[0] * flash_light->light_factor);
+		rgb.g = (uint8_t)(raycast->pixel[1] * flash_light->light_factor);
+		rgb.b = (uint8_t)(raycast->pixel[2] * flash_light->light_factor);
+	}
+	raycast->color = (rgb.r << 24) | (rgb.g << 16) | (rgb.b << 8) | raycast->pixel[3];
 }
 
 void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
-		double player_angle)
+		double player_angle, bool night_vision)
 {
 	t_flash_light	flash_light;
 
@@ -93,17 +107,34 @@ void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 				) * texture_tab[raycast->wall_face]->bytes_per_pixel);
 	raycast->pixel
 		= &texture_tab[raycast->wall_face]->pixels[raycast->tex_index];
-	flash_light.dist_factor = 1.0 / (1.0 + DIST_LIGHT
-			* raycast->fish_eye_correction);
+	if (night_vision)
+	{
+		flash_light.dist_factor = 1.0 / (1.0 + 0.0005
+				* raycast->fish_eye_correction);
+	}
+	else
+	{
+		flash_light.dist_factor = 1.0 / (1.0 + DIST_LIGHT
+				* raycast->fish_eye_correction);
+	}
 	if (flash_light.dist_factor > 1.0)
 		flash_light.dist_factor = 1.0;
 	flash_light.player_dir.x = cos(player_angle);
 	flash_light.player_dir.y = sin(player_angle);
 	calculate_ray_light(raycast, player_angle, &flash_light);
-	flash_light.falloff = 1.0 / (1.0 + DIST_LIGHT
+	if (night_vision)
+	{
+		flash_light.falloff = 1.0 / (1.0 + DIST_LIGHT
+			* pow(fmax(raycast->perp_wall_dist, 100), 1.5));
+	}
+	else
+	{
+		flash_light.falloff = 1.0 / (1.0 + 0.050
 			* pow(raycast->perp_wall_dist, 1.5));
+	}
+	
 	flash_light.angle_factor *= flash_light.falloff;
 	flash_light.light_factor = flash_light.dist_factor
 		* flash_light.angle_factor;
-	set_color_shade(raycast, &flash_light);
+	set_color_shade(raycast, &flash_light, night_vision);
 }

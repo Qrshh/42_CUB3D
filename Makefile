@@ -4,7 +4,7 @@ SRC_DIR     = src/
 OBJ_DIR     = obj/
 
 CC          = gcc
-CFLAGS      = #-Wall -Wextra -Werror -g3
+CFLAGS      = -Ofast #-Wall -Wextra -Werror -g3
 PRFLAGS     = -L/opt/homebrew/lib -ldl -lglfw -pthread -lm
 RM          = rm -rf
 
@@ -22,7 +22,7 @@ RENDER_DIR = render/
 RENDER    = minimap dda raycast render_utils textures
 
 PLAYER_DIR = player/
-PLAYER = player_mooves init_player player_camera player_toggle
+PLAYER = player_mooves init_player player_camera player_toggle player_toggle_utils
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))

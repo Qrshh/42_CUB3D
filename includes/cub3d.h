@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 20:17:56 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 22:42:01 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define NB_SPRITE_TEX 1
 
-# define DIST_LIGHT 0.0009
+# define DIST_LIGHT 0.0030
 
 # define NORTH 0
 # define SOUTH 1
@@ -51,6 +51,13 @@ typedef struct s_coord_int
 	int             x;
 	int             y;
 }                   t_coord_int;
+
+typedef struct s_rgb
+{
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
+}					t_rgb;
 
 typedef struct s_dda
 {
@@ -136,6 +143,7 @@ typedef struct s_all
 	bool			minimap_visible;
 	bool			fov_mouse;
 	bool			sprint;
+	bool			night_vision;
 }					t_all;
 
 // PARSING
@@ -163,8 +171,8 @@ void				draw_ray(t_all *all, double offset_angle, int x);
 void				draw_fov(t_all *all);
 void				draw_minimap(t_all *all);
 
-void				calculate_color(mlx_texture_t **texture_tab,
-						t_raycast *raycast, double player_angle);
+void				calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
+						double player_angle, bool night_vision);
 void				calcul_tex(t_all *all, t_raycast *raycast, int y);
 void				check_wall_face(t_raycast *raycast, t_all *all, t_dda *dda);
 
@@ -181,10 +189,12 @@ void				moove_left_right(void *param);
 void				fov_mooves(void *param);
 void				toggle(mlx_key_data_t keydata, void *param);
 void				mouse_moove(double x_pos, double y_pos, void *param);
+void				toggle_nightvision(t_all *all);
 
 void				move_forward(t_all *all);
 void				move_backward(t_all *all);
 void				move_right(t_all *all);
 void				move_left(t_all *all);
+
 
 #endif
