@@ -6,28 +6,30 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 16:02:56 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 20:17:38 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_wall_face(t_raycast *raycast)
+void	check_wall_face(t_raycast *raycast, t_all *all, t_dda *dda)
 {
-	if (raycast->dda.side == 0)
+	if (dda->side == 0)
 	{
-		if (raycast->dda.ray_dir.x < 0)
+		if (dda->ray_dir.x < 0)
 			raycast->wall_face = WEST;
 		else
 			raycast->wall_face = EAST;
 	}
 	else
 	{
-		if (raycast->dda.ray_dir.y < 0)
+		if (dda->ray_dir.y < 0)
 			raycast->wall_face = NORTH;
 		else
 			raycast->wall_face = SOUTH;
 	}
+	if (all->map[dda->map.y][dda->map.x] == 'D')
+		raycast->wall_face = 4;
 }
 
 void	calcul_tex(t_all *all, t_raycast *raycast, int y)

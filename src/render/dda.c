@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:22:35 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 00:25:27 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 19:56:45 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	dda_loop(t_dda *dda, char **map)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		if (map[dda->map.y][dda->map.x] == '1')
+		if (map[dda->map.y][dda->map.x] == '1'
+			|| map[dda->map.y][dda->map.x] == 'D')
 			dda->hit = 1;
 	}
 }
