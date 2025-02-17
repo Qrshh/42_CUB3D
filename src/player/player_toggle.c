@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:04:12 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 21:00:44 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:10:13 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,39 @@ void	toggle_minimap(t_all *all)
 	}
 }
 
+int is_near_door(t_all *all)
+{
+    double next_x = all->player_pos.x;
+    double next_y = all->player_pos.y;
+    int map_x, map_y;
+
+    next_x += cos(all->player_angle) * TILE_SIZE; 
+    next_y += sin(all->player_angle) * TILE_SIZE;
+
+    map_x = (int)(next_x / TILE_SIZE);
+    map_y = (int)(next_y / TILE_SIZE);
+    if (all->map[map_y][map_x] == 'D')
+        return 1;
+    
+    return 0;
+}
+void toggle_door(t_all *all)
+{
+    double next_x = all->player_pos.x;
+    double next_y = all->player_pos.y;
+    int map_x, map_y;
+
+    if (is_near_door(all))
+    {
+        next_x += cos(all->player_angle) * TILE_SIZE;
+        next_y += sin(all->player_angle) * TILE_SIZE;
+        map_x = (int)(next_x / TILE_SIZE);
+        map_y = (int)(next_y / TILE_SIZE);
+        all->map[map_y][map_x] = '0';
+    }
+}
+
+
 void	toggle(mlx_key_data_t keydata, void *param)
 {
 	t_all	*all;
@@ -43,4 +76,6 @@ void	toggle(mlx_key_data_t keydata, void *param)
 		toggle_minimap(all);
 	else if (keydata.key == MLX_KEY_P && keydata.action == MLX_RELEASE)
 		toggle_mouse_fov(all);
+	else if (keydata.key == MLX_KEY_E && keydata.action == MLX_RELEASE)
+		toggle_door(all);
 }

@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/12 21:03:34 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:09:09 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	move_forward(t_all *all)
 			/ TILE_SIZE);
 	map_y = (int)((next_y + COLLISION_MARGIN * sin(all->player_angle))
 			/ TILE_SIZE);
-	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] == '0')
 		all->player_pos.y = next_y;
-	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] == '0')
 		all->player_pos.x = next_x;
 }
 
@@ -64,9 +64,9 @@ void	move_backward(t_all *all)
 			/ TILE_SIZE);
 	map_y = (int)((next_y - COLLISION_MARGIN * sin(all->player_angle))
 			/ TILE_SIZE);
-	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] == '0')
 		all->player_pos.y = next_y;
-	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] == '0')
 		all->player_pos.x = next_x;
 }
 
@@ -93,9 +93,9 @@ void	move_left(t_all *all)
 			/ TILE_SIZE);
 	map_y = (int)((next_y + COLLISION_MARGIN * cos(all->player_angle))
 			/ TILE_SIZE);
-	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] == '0')
 		all->player_pos.y = next_y;
-	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] == '0')
 		all->player_pos.x = next_x;
 }
 
@@ -122,8 +122,8 @@ void	move_right(t_all *all)
 			/ TILE_SIZE);
 	map_y = (int)((next_y - COLLISION_MARGIN * cos(all->player_angle))
 			/ TILE_SIZE);
-	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] != '1')
+	if (all->map[map_y][(int)(all->player_pos.x / TILE_SIZE)] == '0')
 		all->player_pos.y = next_y;
-	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] != '1')
+	if (all->map[(int)(all->player_pos.y / TILE_SIZE)][map_x] == '0')
 		all->player_pos.x = next_x;
 }

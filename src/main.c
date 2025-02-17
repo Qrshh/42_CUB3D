@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 15:21:19 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 20:15:41 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int ac, char **av)
 	// all->sprites[0] = (t_sprite){3.5, 5.5, 0, 0};
 	// all->sprites[1] = (t_sprite){5.5, 5.5, 0, 0};
 	// all->num_sprites = 1;
+	mlx_texture_t *txt = mlx_load_png("textures/arrow_minimap.png");
+	all->player_img = mlx_texture_to_image(all->mlx, txt);
 	mlx_loop_hook(all->mlx, escape, all);
 	mlx_loop_hook(all->mlx, moove_fw_bw, all);
 	mlx_loop_hook(all->mlx, moove_left_right, all);
