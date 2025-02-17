@@ -6,22 +6,22 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:29:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 18:00:59 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 23:25:56 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int is_path_valid(char *path, t_all **all, int index)
+int	is_path_valid(char *path, t_all **all, int index)
 {
-    char *str;
+	char	*str;
 
-    str = ft_strtrim(path, "\n ");
-    (*all)->tab_textures[index] = mlx_load_png(str);
-    free(str);
-    if(!(*all)->tab_textures[index])
-        return(0);
-    return(1);
+	str = ft_strtrim(path, "\n ");
+	(*all)->tab_textures[index] = mlx_load_png(str);
+	free(str);
+	if (!(*all)->tab_textures[index])
+		return (0);
+	return (1);
 }
 
 void	update_count(t_all **all, char *id)
@@ -58,42 +58,39 @@ int	id_line(char *line, t_all **all, int i)
 	tab[4] = "DO ";
 	while (++i < 5)
 	{
-		k = 0;
-		while (line[k] && line[k] == ' ')
-			k++;
+		k = -1;
+		while (line[++k] && line[k] == ' ')
+			;
 		j = -1;
 		while (tab[i][++j] && line && j < 3)
-		{
 			if (tab[i][j] != line[k++])
 				break ;
-		}
 		if (j == 3)
 			break ;
 	}
 	if (i == 5)
 		return (1);
-	else
-		update_count(all, tab[i]);
+	update_count(all, tab[i]);
 	return (0);
 }
 
-int get_line(char *line)
+int	get_line(char *line)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    while(line[++i] && line[i] == ' ')
-        continue;
-    if(line[i] == 'N')
-        return(0);
-    else if (line[i] == 'S')
-        return(1);
-    else if (line[i] == 'W')
-        return(2);
-    else if (line[i] == 'E')
-        return(3);
-	else 
-		return(4);
+	i = -1;
+	while (line[++i] && line[i] == ' ')
+		continue ;
+	if (line[i] == 'N')
+		return (0);
+	else if (line[i] == 'S')
+		return (1);
+	else if (line[i] == 'W')
+		return (2);
+	else if (line[i] == 'E')
+		return (3);
+	else
+		return (4);
 }
 
 void	is_info_valid(t_all **all, char *line)
@@ -105,12 +102,12 @@ void	is_info_valid(t_all **all, char *line)
 		continue ;
 	if (!id_line(line, all, -1))
 	{
-        if(!is_path_valid(&line[i + 2], all, get_line(line)))
-            ft_all_exit(*all, "Informations path is invalid");
+		if (!is_path_valid(&line[i + 2], all, get_line(line)))
+			ft_all_exit(*all, "Informations path is invalid");
 	}
-    else
-    {
-        is_valid_color(all, line);
-        update_color(all, &line[i + 1], line[0]);
-    }
+	else
+	{
+		is_valid_color(all, line);
+		update_color(all, &line[i + 1], line[0]);
+	}
 }

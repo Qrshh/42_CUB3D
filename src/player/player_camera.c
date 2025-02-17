@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:14:59 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/12 21:05:16 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 23:33:15 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	rotate_right(t_all *all)
 {
 	all->player_angle += ROT_SPEED;
-	if (all->player_angle > 2 * M_PI) // Empêcher un dépassement d'angle
+	if (all->player_angle > 2 * M_PI)
 		all->player_angle -= 2 * M_PI;
 }
 

@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:10:58 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 21:10:22 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 23:36:56 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,12 @@ void	move_forward(t_all *all)
 	int		map_x;
 	int		map_y;
 
+	next_x = all->player_pos.x + cos(all->player_angle) * MOV_SPEED;
+	next_y = all->player_pos.y + sin(all->player_angle) * MOV_SPEED;
 	if (all->sprint)
 	{
-		next_x = all->player_pos.x + cos(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-		next_y = all->player_pos.y + sin(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-	}
-	else
-	{
-		next_x = all->player_pos.x + cos(all->player_angle) * MOV_SPEED;
-		next_y = all->player_pos.y + sin(all->player_angle) * MOV_SPEED;
+		next_x = next_x * BIG_SPEED;
+		next_y = next_y * BIG_SPEED;
 	}
 	map_x = (int)((next_x + COLLISION_MARGIN * cos(all->player_angle))
 			/ TILE_SIZE);
@@ -50,17 +45,12 @@ void	move_backward(t_all *all)
 	int		map_x;
 	int		map_y;
 
+	next_x = all->player_pos.x - cos(all->player_angle) * MOV_SPEED;
+	next_y = all->player_pos.y - sin(all->player_angle) * MOV_SPEED;
 	if (all->sprint)
 	{
-		next_x = all->player_pos.x - cos(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-		next_y = all->player_pos.y - sin(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-	}
-	else
-	{
-		next_x = all->player_pos.x - cos(all->player_angle) * MOV_SPEED;
-		next_y = all->player_pos.y - sin(all->player_angle) * MOV_SPEED;
+		next_x = next_x * BIG_SPEED;
+		next_y = next_y * BIG_SPEED;
 	}
 	map_x = (int)((next_x - COLLISION_MARGIN * cos(all->player_angle))
 			/ TILE_SIZE);
@@ -81,17 +71,12 @@ void	move_left(t_all *all)
 	int		map_x;
 	int		map_y;
 
+	next_x = all->player_pos.x - sin(all->player_angle) * MOV_SPEED;
+	next_y = all->player_pos.y + cos(all->player_angle) * MOV_SPEED;
 	if (all->sprint)
 	{
-		next_x = all->player_pos.x - sin(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-		next_y = all->player_pos.y + cos(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-	}
-	else
-	{
-		next_x = all->player_pos.x - sin(all->player_angle) * MOV_SPEED;
-		next_y = all->player_pos.y + cos(all->player_angle) * MOV_SPEED;
+		next_x = next_x * BIG_SPEED;
+		next_y = next_y * BIG_SPEED;
 	}
 	map_x = (int)((next_x - COLLISION_MARGIN * sin(all->player_angle))
 			/ TILE_SIZE);
@@ -112,17 +97,12 @@ void	move_right(t_all *all)
 	int		map_x;
 	int		map_y;
 
+	next_x = all->player_pos.x + sin(all->player_angle) * MOV_SPEED;
+	next_y = all->player_pos.y - cos(all->player_angle) * MOV_SPEED;
 	if (all->sprint)
 	{
-		next_x = all->player_pos.x + sin(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-		next_y = all->player_pos.y - cos(all->player_angle) * MOV_SPEED
-			* BIG_SPEED;
-	}
-	else
-	{
-		next_x = all->player_pos.x + sin(all->player_angle) * MOV_SPEED;
-		next_y = all->player_pos.y - cos(all->player_angle) * MOV_SPEED;
+		next_x = next_x * BIG_SPEED;
+		next_y = next_y * BIG_SPEED;
 	}
 	map_x = (int)((next_x + COLLISION_MARGIN * sin(all->player_angle))
 			/ TILE_SIZE);

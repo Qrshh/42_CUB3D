@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:29:01 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 18:02:17 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 23:31:31 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,24 @@ int	is_map_close(char **map)
 {
 	int	i;
 	int	j;
+	int	height;
 	int	len;
-	int	height; /** CHANGE TO HEIGHT FOR BETTER UNDERSTANDING **/
 
-	i = -1;
-	while (map[++i])
-		;
+	i = 0;
+	while (map[i])
+		i++;
 	height = i;
 	i = -1;
-	while (++i < height) // CHANGE CONDITION TO i < height
+	while (++i < height)
 	{
-		j = -1;
 		len = ft_strlen(map[i]);
+		j = -1;
 		while (++j < len)
 		{
-			if (ft_isspace(map[i][j]))
-				continue ;
-			if (i == 0 || i == height - 1 || j == 0 || j == len - 1)
-			{
-				if (map[i][j] != '1')
-					return (0);
-			}
-			else if (is_allowed_char(map[i][j]))
-			{
-				if ((j > 0 && (ft_isspace(map[i][j - 1]) || map[i][j - 1] == '\0'))
-					|| (j < len - 1 && (ft_isspace(map[i][j + 1]) || map[i][j + 1] == '\0'))
-					|| (i > 0 && (ft_isspace(map[i - 1][j]) || map[i - 1][j] == '\0'))
-					|| (i < height - 1 && (ft_isspace(map[i + 1][j]) || map[i + 1][j] == '\0')))
-				{
-					return (0); 
-				}
-				// CHANGE IF FOR CHECK \0
-			}
+			if (!ft_isspace(map[i][j]) && ((is_border(i, j, height, len)
+						&& map[i][j] != '1') || (is_allowed_char(map[i][j])
+						&& is_invalid_space(map, i, j, height))))
+				return (0);
 		}
 	}
 	return (1);
@@ -72,9 +58,7 @@ int	forbidden_char(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (map[i][j] && map[i][j] != ' ' && map[i][j] != '1'
-				&& map[i][j] != 'N' && map[i][j] != '0' && map[i][j] != 'E'
-				&& map[i][j] != 'S' && map[i][j] != 'D' && map[i][j] != 'W')
+			if (!is_allowed_char(map[i][j]) && map[i][j] != '1')
 				return (0);
 		}
 	}

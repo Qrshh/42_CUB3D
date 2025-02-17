@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 22:44:45 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 23:26:38 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	calcul_tex(t_all *all, t_raycast *raycast, int y)
 void	calculate_ray_light(t_raycast *raycast, double player_angle,
 	t_flash_light *flash_light)
 {
+	(void)player_angle;
 	flash_light->ray_dir_norm = sqrt(raycast->dda.ray_dir.x
 			* raycast->dda.ray_dir.x + raycast->dda.ray_dir.y
 			* raycast->dda.ray_dir.y);
@@ -73,7 +74,6 @@ void	calculate_ray_light(t_raycast *raycast, double player_angle,
 void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light, bool night_vision)
 {
 	t_rgb	rgb;
-	uint8_t	gray;
 
 	if (night_vision)
 	{
