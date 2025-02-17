@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:24:23 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 18:26:44 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:26:55 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,7 @@ void	draw_minimap(t_all *all)
 	}
 	player_x = offset_x + (all->player_pos.x / TILE_SIZE) * tile_size;
 	player_y = offset_y + (all->player_pos.y / TILE_SIZE) * tile_size;
-	for (int i = 0; i < tile_size / 2; i++)
-	{
-		for (int j = 0; j < tile_size / 2; j++)
-		{
-			mlx_put_pixel(all->minimap_img, player_x + i, player_y + j,
-				0xFF49FF);
-		}
-	}
+	mlx_image_to_window(all->mlx, all->player_img, player_x, player_y);
 	mlx_image_to_window(all->mlx, all->minimap_img, 10, 10);
 }
 
