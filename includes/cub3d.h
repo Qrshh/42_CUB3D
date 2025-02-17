@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 21:14:14 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 21:26:56 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define NB_SPRITE_TEX 1
 
-# define DIST_LIGHT 0.0009
+# define DIST_LIGHT 0.009
 
 # define NORTH 0
 # define SOUTH 1
@@ -164,8 +164,8 @@ void				draw_ray(t_all *all, double offset_angle, int x);
 void				draw_fov(t_all *all);
 void				draw_minimap(t_all *all);
 
-void				calculate_color(mlx_texture_t **texture_tab,
-						t_raycast *raycast, double player_angle);
+void				calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
+						double player_angle, bool night_vision);
 void				calcul_tex(t_all *all, t_raycast *raycast, int y);
 void				check_wall_face(t_raycast *raycast, t_all *all, t_dda *dda);
 
@@ -182,11 +182,12 @@ void				moove_left_right(void *param);
 void				fov_mooves(void *param);
 void				toggle(mlx_key_data_t keydata, void *param);
 void				mouse_moove(double x_pos, double y_pos, void *param);
-void 				toggle_nightvision(t_all *all);
+void				toggle_nightvision(t_all *all);
 
 void				move_forward(t_all *all);
 void				move_backward(t_all *all);
 void				move_right(t_all *all);
 void				move_left(t_all *all);
+
 
 #endif

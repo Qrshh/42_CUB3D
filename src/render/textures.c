@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 20:17:38 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 21:28:42 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,29 @@ void	calculate_ray_light(t_raycast *raycast, double player_angle,
 	flash_light->angle_factor = (flash_light->scalar_product + 1.0) / 2.0;
 }
 
-void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light)
+void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light, bool night_vision)
 {
 	uint8_t			r;
 	uint8_t			g;
 	uint8_t			b;
 
-	r = (uint8_t)(raycast->pixel[0] * flash_light->light_factor);
-	g = (uint8_t)(raycast->pixel[1] * flash_light->light_factor);
-	b = (uint8_t)(raycast->pixel[2] * flash_light->light_factor);
+	if (night_vision)
+	{
+		r = (uint8_t)(raycast->pixel[0] * flash_light->light_factor);
+		g = (uint8_t)(raycast->pixel[1] * flash_light->light_factor * 5);
+		b = (uint8_t)(raycast->pixel[2] * flash_light->light_factor);
+	}
+	else
+	{
+		r = (uint8_t)(raycast->pixel[0] * flash_light->light_factor);
+		g = (uint8_t)(raycast->pixel[1] * flash_light->light_factor);
+		b = (uint8_t)(raycast->pixel[2] * flash_light->light_factor);
+	}
 	raycast->color = (r << 24) | (g << 16) | (b << 8) | raycast->pixel[3];
 }
 
 void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
-		double player_angle)
+		double player_angle, bool night_vision)
 {
 	t_flash_light	flash_light;
 
@@ -100,10 +109,19 @@ void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 	flash_light.player_dir.x = cos(player_angle);
 	flash_light.player_dir.y = sin(player_angle);
 	calculate_ray_light(raycast, player_angle, &flash_light);
-	flash_light.falloff = 1.0 / (1.0 + DIST_LIGHT
+	if (night_vision)
+	{
+		flash_light.falloff = 1.0 / (1.0 + 0.0005
 			* pow(raycast->perp_wall_dist, 1.5));
+	}
+	else
+	{
+		flash_light.falloff = 1.0 / (1.0 + DIST_LIGHT
+			* pow(raycast->perp_wall_dist, 1.5));
+	}
+	
 	flash_light.angle_factor *= flash_light.falloff;
 	flash_light.light_factor = flash_light.dist_factor
 		* flash_light.angle_factor;
-	set_color_shade(raycast, &flash_light);
+	set_color_shade(raycast, &flash_light, night_vision);
 }

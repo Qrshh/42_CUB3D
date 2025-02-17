@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_toggle_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 21:13:14 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 21:14:29 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 21:24:20 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
