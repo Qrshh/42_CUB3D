@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 00:23:17 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:02:52 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define SENS 0.001
 # define FOV 66
 
+# define NB_SPRITE_TEX 1
+
+# define DIST_LIGHT 0.009
+
 # define NORTH 0
 # define SOUTH 1
 # define WEST 2
@@ -44,20 +48,32 @@ typedef struct s_coord
 
 typedef struct s_coord_int
 {
-    int             x;
-    int             y;
+	int             x;
+	int             y;
 }                   t_coord_int;
 
 typedef struct s_dda
 {
-    t_coord         ray_dir;
-    t_coord         side_dist;
-    t_coord         delta_dist;
-    t_coord         step;
-    t_coord_int     map;
-    int hit;
-    int side;
+	t_coord         ray_dir;
+	t_coord         side_dist;
+	t_coord         delta_dist;
+	t_coord         step;
+	t_coord_int     map;
+	int hit;
+	int side;
 }               t_dda;
+
+typedef struct s_flash_light
+{
+	t_coord		player_dir;
+	double		dist_factor;
+	double		ray_dir_norm;
+	double		player_dir_norm;
+	double		scalar_product;
+	double		angle_factor;
+	double		falloff;
+	double		light_factor;
+}				t_flash_light;
 
 typedef	struct s_raycast
 {
@@ -80,8 +96,19 @@ typedef	struct s_raycast
 	t_dda			dda;
 }					t_raycast;
 
+typedef struct s_sprite
+{
+	double		x;
+	double		y;
+	int			texture_id;
+	double		distance;
+}				t_sprite;
+
 typedef struct s_all
 {
+	t_sprite		*sprites;
+	int				num_sprites;
+	mlx_texture_t	*sprite_texture[NB_SPRITE_TEX];	
 	double			fov;
 	t_coord			player_pos;
 	double			player_angle;
@@ -136,7 +163,7 @@ void				draw_fov(t_all *all);
 void				draw_minimap(t_all *all);
 
 void				calculate_color(mlx_texture_t **texture_tab,
-						t_raycast *raycast);
+						t_raycast *raycast, double player_angle);
 void				calcul_tex(t_all *all, t_raycast *raycast, int y);
 void				check_wall_face(t_raycast *raycast);
 
