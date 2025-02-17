@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 21:26:56 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 22:42:01 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define NB_SPRITE_TEX 1
 
-# define DIST_LIGHT 0.009
+# define DIST_LIGHT 0.0030
 
 # define NORTH 0
 # define SOUTH 1
@@ -51,6 +51,13 @@ typedef struct s_coord_int
 	int             x;
 	int             y;
 }                   t_coord_int;
+
+typedef struct s_rgb
+{
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
+}					t_rgb;
 
 typedef struct s_dda
 {
