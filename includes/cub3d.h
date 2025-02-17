@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 20:17:56 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 21:14:14 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct s_all
 	bool			minimap_visible;
 	bool			fov_mouse;
 	bool			sprint;
+	bool			night_vision;
 }					t_all;
 
 // PARSING
@@ -181,6 +182,7 @@ void				moove_left_right(void *param);
 void				fov_mooves(void *param);
 void				toggle(mlx_key_data_t keydata, void *param);
 void				mouse_moove(double x_pos, double y_pos, void *param);
+void 				toggle_nightvision(t_all *all);
 
 void				move_forward(t_all *all);
 void				move_backward(t_all *all);

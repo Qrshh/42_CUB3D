@@ -22,7 +22,7 @@ RENDER_DIR = render/
 RENDER    = minimap dda raycast render_utils textures
 
 PLAYER_DIR = player/
-PLAYER = player_mooves init_player player_camera player_toggle
+PLAYER = player_mooves init_player player_camera player_toggle player_toggle_utils
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))
