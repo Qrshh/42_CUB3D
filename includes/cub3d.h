@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 16:02:52 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 17:48:33 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_all
 	char			**map;
 	int				width_map;
 	char			**infos;
-	mlx_texture_t	*tab_textures[4];
+	mlx_texture_t	*tab_textures[5];
 	mlx_t			*mlx;
 	int				f;
 	int				c;
@@ -125,6 +125,7 @@ typedef struct s_all
 	int				so;
 	int				we;
 	int				ea;
+	int 			d;
 	int				color_c;
 	int				color_f;
 	mlx_image_t		*img;

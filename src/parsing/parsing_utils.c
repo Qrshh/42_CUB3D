@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 00:18:19 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 17:54:37 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_allowed_char(char c)
 {
-	if (c == ' ' || c == '0' || c == 'N' || c == 'E' || c == 'S' || c == 'W')
+	if (c == ' ' || c == '0' || c == 'N' || c == 'E' || c == 'S' || c == 'W' || c == 'D')
 		return (1);
 	return (0);
 }
@@ -46,13 +46,13 @@ int	is_line_map(t_all *all, char *line)
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (!line[i] || line[i] == 'N' || line[i] == 'E' || line[i] == 'S'
-		|| line[i] == 'W' || line[i] == 'F' || line[i] == 'C')
+		|| line[i] == 'W' || line[i] == 'F' || line[i] == 'C' || line[i] == 'D')
 		return (0);
 	line--;
 	while (line[++i])
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != '\n'
-			&& line[i] != 'N' && line[i] != 'E' && line[i] != 'S'
+			&& line[i] != 'N' && line[i] != 'D' && line[i] != 'E' && line[i] != 'S'
 			&& line[i] != 'W' && line[i] != ' ' && line[i] != '\t')
 		{
 			ft_all_exit(all, "Forbidden char in map");
@@ -66,6 +66,7 @@ int	is_line_map(t_all *all, char *line)
 void	init_ptr(t_all **all)
 {
 	int	i;
+
 	*all = ft_calloc(1, sizeof(t_all));
 	(*all)->map = NULL;
 	(*all)->infos = NULL;
@@ -73,8 +74,6 @@ void	init_ptr(t_all **all)
 	(*all)->player_pos.x = 0;
 	(*all)->player_pos.y = 0;
 	(*all)->player_angle = 0;
-	(*all)->plane_pos.x = 0;
-	(*all)->plane_pos.y = 0;
 	(*all)->starting_dir = 0;
 	(*all)->fov_mouse = false;
 	(*all)->f = 0;
@@ -83,6 +82,7 @@ void	init_ptr(t_all **all)
 	(*all)->so = 0;
 	(*all)->we = 0;
 	(*all)->ea = 0;
+	(*all)->d = 0;
 	(*all)->color_c = 0;
 	(*all)->color_f = 0;
 	(*all)->img = mlx_new_image((*all)->mlx, WIDTH, HEIGHT);
@@ -90,10 +90,8 @@ void	init_ptr(t_all **all)
 	(*all)->ray_img = NULL;
 	(*all)->wall_img = NULL;
 	(*all)->fov = FOV * (M_PI / 180);
-	// (*all)->img = mlx_new_image((*all)->mlx, 10, 10);
-	// (*all)->player_img = mlx_new_image((*all)->mlx, 16, 16);
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 		(*all)->tab_textures[i] = NULL;
 }
 
