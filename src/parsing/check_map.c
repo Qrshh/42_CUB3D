@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:29:01 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 15:25:12 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 18:02:17 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	forbidden_char(char **map)
 		{
 			if (map[i][j] && map[i][j] != ' ' && map[i][j] != '1'
 				&& map[i][j] != 'N' && map[i][j] != '0' && map[i][j] != 'E'
-				&& map[i][j] != 'S' && map[i][j] != 'W')
+				&& map[i][j] != 'S' && map[i][j] != 'D' && map[i][j] != 'W')
 				return (0);
 		}
 	}

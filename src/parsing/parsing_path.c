@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:29:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 21:02:57 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:00:59 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,16 @@ void	update_count(t_all **all, char *id)
 		(*all)->f += 1;
 	else if (ft_strcmp(id, "C ") == 0)
 		(*all)->c += 1;
+	else if (ft_strcmp(id, "DO ") == 0)
+		(*all)->d += 1;
 	if ((*all)->c > 1 || (*all)->f > 1 || (*all)->no > 1 || (*all)->so > 1
-		|| (*all)->we > 1 || (*all)->ea > 1)
+		|| (*all)->we > 1 || (*all)->ea > 1 || (*all)->d > 1)
 		ft_all_exit(*all, "Infos are existing more than one time");
 }
 
 int	id_line(char *line, t_all **all, int i)
 {
-	char	*tab[4];
+	char	*tab[5];
 	int		j;
 	int		k;
 
@@ -53,7 +55,8 @@ int	id_line(char *line, t_all **all, int i)
 	tab[1] = "SO ";
 	tab[2] = "EA ";
 	tab[3] = "WE ";
-	while (++i < 4)
+	tab[4] = "DO ";
+	while (++i < 5)
 	{
 		k = 0;
 		while (line[k] && line[k] == ' ')
@@ -67,7 +70,7 @@ int	id_line(char *line, t_all **all, int i)
 		if (j == 3)
 			break ;
 	}
-	if (i == 4)
+	if (i == 5)
 		return (1);
 	else
 		update_count(all, tab[i]);
@@ -87,8 +90,10 @@ int get_line(char *line)
         return(1);
     else if (line[i] == 'W')
         return(2);
-    else 
+    else if (line[i] == 'E')
         return(3);
+	else 
+		return(4);
 }
 
 void	is_info_valid(t_all **all, char *line)

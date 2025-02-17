@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 19:24:24 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 00:17:56 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 18:01:45 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	check_file(t_all **all)
 			is_info_valid(all, (*all)->infos[size]);
 		else if (size == 5)
 			is_info_valid(all, (*all)->infos[size]);
+		else if (size == 6)
+			is_info_valid(all, (*all)->infos[size]);
 	}
-	if (size != 6)
+	if (size != 7)
 		ft_all_exit(*all, "Wrong number of informations");
 }
 
