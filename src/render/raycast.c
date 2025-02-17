@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 00:25:38 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:20:39 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	draw_wall(t_all *all, t_raycast *raycast, int x)
 		else
 		{
 			calcul_tex(all, raycast, y);
-			calculate_color(all->tab_textures, raycast);
+			calculate_color(all->tab_textures, raycast, all->player_angle);
 			mlx_put_pixel(all->wall_img, x, y, raycast->color);
 		}
 		y++;
