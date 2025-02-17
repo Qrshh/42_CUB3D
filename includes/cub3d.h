@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 17:48:33 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:17:56 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define NB_SPRITE_TEX 1
 
-# define DIST_LIGHT 0.009
+# define DIST_LIGHT 0.0009
 
 # define NORTH 0
 # define SOUTH 1
@@ -166,7 +166,7 @@ void				draw_minimap(t_all *all);
 void				calculate_color(mlx_texture_t **texture_tab,
 						t_raycast *raycast, double player_angle);
 void				calcul_tex(t_all *all, t_raycast *raycast, int y);
-void				check_wall_face(t_raycast *raycast);
+void				check_wall_face(t_raycast *raycast, t_all *all, t_dda *dda);
 
 void				dda_loop(t_dda *dda, char **map);
 void				calculate_step(t_all *all, t_dda *dda);

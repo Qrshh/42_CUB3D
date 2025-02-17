@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 15:20:39 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 20:18:50 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_ray(t_all *all, double angle, int x)
 	dda.side = 0;
 	calculate_step(all, &dda);
 	dda_loop(&dda, all->map);
-	check_wall_face(&raycast);
+	check_wall_face(&raycast, all, &dda);
 	if (dda.side == 0)
 		raycast.perp_wall_dist = (dda.side_dist.x - dda.delta_dist.x);
 	else
