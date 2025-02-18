@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 21:22:43 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/18 17:51:17 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	draw_fov(t_all *all)
 
 void	calculate_ray(t_raycast *raycast)
 {
-	double	project;
-
 	raycast->wall_height = (int)(TILE_SIZE * HEIGHT
 			/ raycast->fish_eye_correction);
 	raycast->y_start = -raycast->wall_height / 2 + HEIGHT / 2;
