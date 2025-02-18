@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/18 04:09:25 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:37:35 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ void	escape(void *param)
 
 int	main(int ac, char **av)
 {
-	t_all	*all;
+	t_all			*all;
+	mlx_texture_t	*txt;
 
 	welcome();
 	parsing(&all, ac, av);
-	mlx_texture_t *txt = mlx_load_png("textures/arrow_minimap.png");
+	init_nightvision_text(all);
+	txt = mlx_load_png("textures/arrow_minimap.png");
 	all->player_img = mlx_texture_to_image(all->mlx, txt);
 	mlx_loop_hook(all->mlx, escape, all);
 	mlx_loop_hook(all->mlx, moove_fw_bw, all);

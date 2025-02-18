@@ -4,7 +4,7 @@ SRC_DIR     = src/
 OBJ_DIR     = obj/
 
 CC          = gcc
-CFLAGS      = -Ofast #-Wall -Wextra -Werror -g3
+CFLAGS      = -Ofast -Wall -Wextra -Werror -g3
 PRFLAGS     = -L/opt/homebrew/lib -ldl -lglfw -pthread -lm
 RM          = rm -rf
 
