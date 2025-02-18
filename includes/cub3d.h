@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 22:42:01 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/18 17:50:47 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# define WIDTH 1000
-# define HEIGHT 800
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # define MOV_SPEED 5
 # define BIG_SPEED 2
@@ -48,9 +48,9 @@ typedef struct s_coord
 
 typedef struct s_coord_int
 {
-	int             x;
-	int             y;
-}                   t_coord_int;
+	int				x;
+	int				y;
+}					t_coord_int;
 
 typedef struct s_rgb
 {
@@ -61,28 +61,28 @@ typedef struct s_rgb
 
 typedef struct s_dda
 {
-	t_coord         ray_dir;
-	t_coord         side_dist;
-	t_coord         delta_dist;
-	t_coord         step;
-	t_coord_int     map;
-	int hit;
-	int side;
-}               t_dda;
+	t_coord			ray_dir;
+	t_coord			side_dist;
+	t_coord			delta_dist;
+	t_coord			step;
+	t_coord_int		map;
+	int				hit;
+	int				side;
+}					t_dda;
 
 typedef struct s_flash_light
 {
-	t_coord		player_dir;
-	double		dist_factor;
-	double		ray_dir_norm;
-	double		player_dir_norm;
-	double		scalar_product;
-	double		angle_factor;
-	double		falloff;
-	double		light_factor;
-}				t_flash_light;
+	t_coord			player_dir;
+	double			dist_factor;
+	double			ray_dir_norm;
+	double			player_dir_norm;
+	double			scalar_product;
+	double			angle_factor;
+	double			falloff;
+	double			light_factor;
+}					t_flash_light;
 
-typedef	struct s_raycast
+typedef struct s_raycast
 {
 	t_coord			pos_ray;
 	double			distance;
@@ -96,8 +96,8 @@ typedef	struct s_raycast
 	uint8_t			*pixel;
 	int				color;
 	int				hit_vertical;
-	int 			step_x;
-	int 			step_y;
+	int				step_x;
+	int				step_y;
 	double			perp_wall_dist;
 	int				wall_face;
 	t_dda			dda;
@@ -105,17 +105,17 @@ typedef	struct s_raycast
 
 typedef struct s_sprite
 {
-	double		x;
-	double		y;
-	int			texture_id;
-	double		distance;
-}				t_sprite;
+	double			x;
+	double			y;
+	int				texture_id;
+	double			distance;
+}					t_sprite;
 
 typedef struct s_all
 {
 	t_sprite		*sprites;
 	int				num_sprites;
-	mlx_texture_t	*sprite_texture[NB_SPRITE_TEX];	
+	mlx_texture_t	*sprite_texture[NB_SPRITE_TEX];
 	double			fov;
 	t_coord			player_pos;
 	double			player_angle;
@@ -132,7 +132,7 @@ typedef struct s_all
 	int				so;
 	int				we;
 	int				ea;
-	int 			d;
+	int				d;
 	int				color_c;
 	int				color_f;
 	mlx_image_t		*img;
@@ -144,6 +144,7 @@ typedef struct s_all
 	bool			fov_mouse;
 	bool			sprint;
 	bool			night_vision;
+	mlx_image_t		*text_img;
 }					t_all;
 
 // PARSING
@@ -171,8 +172,9 @@ void				draw_ray(t_all *all, double offset_angle, int x);
 void				draw_fov(t_all *all);
 void				draw_minimap(t_all *all);
 
-void				calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
-						double player_angle, bool night_vision);
+void				calculate_color(mlx_texture_t **texture_tab,
+						t_raycast *raycast, double player_angle,
+						bool night_vision);
 void				calcul_tex(t_all *all, t_raycast *raycast, int y);
 void				check_wall_face(t_raycast *raycast, t_all *all, t_dda *dda);
 
@@ -190,11 +192,11 @@ void				fov_mooves(void *param);
 void				toggle(mlx_key_data_t keydata, void *param);
 void				mouse_moove(double x_pos, double y_pos, void *param);
 void				toggle_nightvision(t_all *all);
+void				init_nightvision_text(t_all *all);
 
 void				move_forward(t_all *all);
 void				move_backward(t_all *all);
 void				move_right(t_all *all);
 void				move_left(t_all *all);
-
 
 #endif
