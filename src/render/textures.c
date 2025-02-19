@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 23:15:21 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/20 00:39:51 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 		double player_angle, bool night_vision)
 {
 	if (raycast->texture_coord.x < 0
-		|| raycast->texture_coord.x >= \
+		|| raycast->texture_coord.x >= 
 		(int)texture_tab[raycast->wall_face]->width)
-		return ;
+		raycast->texture_coord.x -= 1;
 	if (raycast->texture_coord.y < 0
-		|| raycast->texture_coord.y >= \
+		|| raycast->texture_coord.y >= 
 		(int)texture_tab[raycast->wall_face]->height)
-		return ;
+		raycast->texture_coord.y -= 1;
 	raycast->tex_index = ((((int)raycast->texture_coord.y
 					* (int)texture_tab[raycast->wall_face]->width
 					+ (int)raycast->texture_coord.x))
