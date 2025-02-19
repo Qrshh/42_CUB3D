@@ -1,7 +1,8 @@
 NO textures/N.png
-SO textures/S.png
+SO textures/Ss.png
 WE textures/W.png
 EA textures/E.png
+DO textures/door.png
 
 
 F 220,100,0
@@ -9,7 +10,7 @@ C 225,30,0
 
 1111111111111
 1000010000001
+10000D0000001
+1W00010000011
 1000010000001
-1W00000000011
-1000000000001
 1111111111111

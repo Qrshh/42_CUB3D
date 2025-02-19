@@ -4,7 +4,7 @@ SRC_DIR     = src/
 OBJ_DIR     = obj/
 
 CC          = gcc
-CFLAGS      = #-Wall -Wextra -Werror -g3
+CFLAGS      = -Ofast -Wall -Wextra -Werror -g3
 PRFLAGS     = -L/opt/homebrew/lib -ldl -lglfw -pthread -lm
 RM          = rm -rf
 
@@ -16,13 +16,13 @@ MLX_DIR = $(INCLUDES)MLX42/
 MLX 	= $(MLX_DIR)build/libmlx42.a
 
 PARSING_DIR  = parsing/
-PARSING		 = check_map parsing_utils parsing parsing_path parsing_color
+PARSING		 = check_map parsing_utils parsing_utils2 parsing parsing_path parsing_color
 
 RENDER_DIR = render/
-RENDER    = minimap dda raycast render_utils textures
+RENDER    = minimap dda raycast render_utils textures dynamic_light
 
 PLAYER_DIR = player/
-PLAYER = player_mooves init_player player_camera player_toggle
+PLAYER = player_mooves init_player player_camera player_toggle player_toggle_utils
 
 SRC_FILES  += main utils
 SRC_FILES  += $(addprefix $(PARSING_DIR), $(PARSING))

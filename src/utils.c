@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:12:18 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 00:16:58 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 23:56:28 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ void	free_all(t_all *all)
 	if (all->infos)
 		free_tab(all->infos);
 	i = -1;
-	while (++i < 4)
+	while (++i < NB_TEXT)
 	{
 		if (all->tab_textures[i])
 			mlx_delete_texture(all->tab_textures[i]);
 	}
-	mlx_terminate(all->mlx);
+	if (all->mlx)
+		mlx_terminate(all->mlx);
 	free(all);
 }
 

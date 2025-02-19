@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:22:35 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 00:25:27 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:19:03 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	calculate_step(t_all *all, t_dda *dda)
 		dda->side_dist.x = ((dda->map.x + 1) * TILE_SIZE - all->player_pos.x)
 			/ fabs(dda->ray_dir.x);
 	}
-
 	if (dda->ray_dir.y < 0)
 	{
 		dda->step.y = -1;
@@ -57,7 +56,8 @@ void	dda_loop(t_dda *dda, char **map)
 			dda->map.y += dda->step.y;
 			dda->side = 1;
 		}
-		if (map[dda->map.y][dda->map.x] == '1')
+		if (map[dda->map.y][dda->map.x] == '1'
+			|| map[dda->map.y][dda->map.x] == 'D')
 			dda->hit = 1;
 	}
 }

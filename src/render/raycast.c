@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 00:25:38 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 23:05:10 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ void	draw_fov(t_all *all)
 
 void	calculate_ray(t_raycast *raycast)
 {
-	double	project;
-
 	raycast->wall_height = (int)(TILE_SIZE * HEIGHT
-			/ raycast->fish_eye_correction);
+			/ raycast->fish_eye);
 	raycast->y_start = -raycast->wall_height / 2 + HEIGHT / 2;
 	raycast->y_end = raycast->wall_height / 2 + HEIGHT / 2;
 }
@@ -60,7 +58,11 @@ void	draw_wall(t_all *all, t_raycast *raycast, int x)
 		else
 		{
 			calcul_tex(all, raycast, y);
-			calculate_color(all->tab_textures, raycast);
+			calculate_color(all->tab_textures, raycast, all->player_angle,
+				all->night_vision);
+			if (x < 0 || x >= (int)all->wall_img->width || y < 0
+				|| y >= (int)all->wall_img->height)
+				return ;
 			mlx_put_pixel(all->wall_img, x, y, raycast->color);
 		}
 		y++;
@@ -82,17 +84,17 @@ void	draw_ray(t_all *all, double angle, int x)
 	dda.side = 0;
 	calculate_step(all, &dda);
 	dda_loop(&dda, all->map);
-	check_wall_face(&raycast);
+	check_wall_face(&raycast, all, &dda);
 	if (dda.side == 0)
 		raycast.perp_wall_dist = (dda.side_dist.x - dda.delta_dist.x);
 	else
 		raycast.perp_wall_dist = (dda.side_dist.y - dda.delta_dist.y);
-	raycast.fish_eye_correction = raycast.perp_wall_dist
+	raycast.fish_eye = raycast.perp_wall_dist
 		* cos(angle - all->player_angle);
 	raycast.dda = dda;
 	draw_wall(all, &raycast, x);
 }
-
+	// all->z_buffer[x] = raycast.perp_wall_dist;
 
 // void	square(t_all *all, int x, int y, int color)
 // {
