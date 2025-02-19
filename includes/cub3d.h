@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 22:48:43 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 23:56:36 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define BIG_SPEED 2
 # define ROT_SPEED 0.05
 # define TILE_SIZE 64
-# define COLLISION_MARGIN 5
+# define COLL_MARG 5
 # define SENS 0.001
 # define FOV 66
 

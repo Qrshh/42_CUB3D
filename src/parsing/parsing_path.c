@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:29:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 22:46:29 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 23:09:46 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	is_path_valid(char *path, t_all **all, int index)
 {
 	char	*str;
-	// int		fd;
+	int		fd;
 
 	str = ft_strtrim(path, "\n ");
 	if (ft_strstr(str, ".png") == NULL)
@@ -24,13 +24,13 @@ int	is_path_valid(char *path, t_all **all, int index)
 		free(str);
 		return (0);
 	}
-	// fd = open(str, O_RDONLY);
-	// if (fd == -1)
-	// {
-	// 	free(str);
-	// 	return (0);
-	// }
-	// close(fd);
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+	{
+		free(str);
+		return (0);
+	}
+	close(fd);
 	(*all)->tab_textures[index] = mlx_load_png(str);
 	free(str);
 	if (!(*all)->tab_textures[index])
