@@ -19,7 +19,7 @@ PARSING_DIR  = parsing/
 PARSING		 = check_map parsing_utils parsing parsing_path parsing_color
 
 RENDER_DIR = render/
-RENDER    = minimap dda raycast render_utils textures
+RENDER    = minimap dda raycast render_utils textures sprite dynamic_light
 
 PLAYER_DIR = player/
 PLAYER = player_mooves init_player player_camera player_toggle player_toggle_utils

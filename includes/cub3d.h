@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/18 17:50:47 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 01:15:28 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define NB_SPRITE_TEX 1
 
-# define DIST_LIGHT 0.0030
+# define DIST_LIGHT 0.005
 
 # define NORTH 0
 # define SOUTH 1
@@ -73,7 +73,7 @@ typedef struct s_dda
 typedef struct s_flash_light
 {
 	t_coord			player_dir;
-	double			dist_factor;
+	double			dst_factor;
 	double			ray_dir_norm;
 	double			player_dir_norm;
 	double			scalar_product;
@@ -87,7 +87,7 @@ typedef struct s_raycast
 	t_coord			pos_ray;
 	double			distance;
 	int				wall_height;
-	double			fish_eye_correction;
+	double			fish_eye;
 	double			projected_wall_height;
 	int				y_start;
 	int				y_end;
@@ -113,9 +113,10 @@ typedef struct s_sprite
 
 typedef struct s_all
 {
-	t_sprite		*sprites;
+	t_sprite		sprites[1];
 	int				num_sprites;
 	mlx_texture_t	*sprite_texture[NB_SPRITE_TEX];
+	double			z_buffer[WIDTH];
 	double			fov;
 	t_coord			player_pos;
 	double			player_angle;
@@ -180,6 +181,13 @@ void				check_wall_face(t_raycast *raycast, t_all *all, t_dda *dda);
 
 void				dda_loop(t_dda *dda, char **map);
 void				calculate_step(t_all *all, t_dda *dda);
+
+// DYNAMIC_LIGHT
+int					get_pixel_color(t_raycast *raycast, uint8_t *pixel,
+						bool night_vision, double player_angle);
+
+// SPRITE RENDER
+void				calculate_sprite_infos(t_all *all);
 
 // UTILS RENDER
 void				refresh_image(mlx_t *mlx, mlx_image_t **image);
