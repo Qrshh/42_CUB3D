@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+
+void	toggle_nightvision(t_all *all)
+{
+	all->night_vision = !all->night_vision;
+}
+
 void init_nightvision_text(t_all *all)
 {
     if (!all || !all->mlx)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_toggle.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:04:12 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 21:24:46 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 23:34:18 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,45 +34,50 @@ void	toggle_minimap(t_all *all)
 	}
 }
 
-int is_near_door(t_all *all)
+int	is_near_door(t_all *all)
 {
-    double next_x = all->player_pos.x;
-    double next_y = all->player_pos.y;
-    int map_x, map_y;
+	double	next_x;
+	double	next_y;
+	int		map_x;
+	int		map_y;
 
-    next_x += cos(all->player_angle) * TILE_SIZE; 
-    next_y += sin(all->player_angle) * TILE_SIZE;
-
-    map_x = (int)(next_x / TILE_SIZE);
-    map_y = (int)(next_y / TILE_SIZE);
-    if (all->map[map_y][map_x] == 'D')
-        return 1;
+	next_x = all->player_pos.x;
+	next_y = all->player_pos.y;
+	next_x += cos(all->player_angle) * TILE_SIZE;
+	next_y += sin(all->player_angle) * TILE_SIZE;
+	map_x = (int)(next_x / TILE_SIZE);
+	map_y = (int)(next_y / TILE_SIZE);
+	if (all->map[map_y][map_x] == 'D')
+		return (1);
 	else if (all->map[map_y][map_x] == '6')
 		return (2);
-    
-    return 0;
+	return (0);
 }
-void toggle_door(t_all *all)
-{
-    double next_x = all->player_pos.x;
-    double next_y = all->player_pos.y;
-    int map_x, map_y;
 
-    if (is_near_door(all) == 1)
-    {
-        next_x += cos(all->player_angle) * TILE_SIZE;
-        next_y += sin(all->player_angle) * TILE_SIZE;
-        map_x = (int)(next_x / TILE_SIZE);
-        map_y = (int)(next_y / TILE_SIZE);
-        all->map[map_y][map_x] = '6';
-    }
+void	toggle_door(t_all *all)
+{
+	double	next_x;
+	double	next_y;
+	int		map_x;
+	int		map_y;
+
+	next_x = all->player_pos.x;
+	next_y = all->player_pos.y;
+	if (is_near_door(all) == 1)
+	{
+		next_x += cos(all->player_angle) * TILE_SIZE;
+		next_y += sin(all->player_angle) * TILE_SIZE;
+		map_x = (int)(next_x / TILE_SIZE);
+		map_y = (int)(next_y / TILE_SIZE);
+		all->map[map_y][map_x] = '6';
+	}
 	else if (is_near_door(all) == 2)
 	{
 		next_x += cos(all->player_angle) * TILE_SIZE;
-        next_y += sin(all->player_angle) * TILE_SIZE;
-        map_x = (int)(next_x / TILE_SIZE);
-        map_y = (int)(next_y / TILE_SIZE);
-        all->map[map_y][map_x] = 'D';
+		next_y += sin(all->player_angle) * TILE_SIZE;
+		map_x = (int)(next_x / TILE_SIZE);
+		map_y = (int)(next_y / TILE_SIZE);
+		all->map[map_y][map_x] = 'D';
 	}
 }
 

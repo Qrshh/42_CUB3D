@@ -16,7 +16,7 @@ MLX_DIR = $(INCLUDES)MLX42/
 MLX 	= $(MLX_DIR)build/libmlx42.a
 
 PARSING_DIR  = parsing/
-PARSING		 = check_map parsing_utils parsing parsing_path parsing_color
+PARSING		 = check_map parsing_utils parsing_utils2 parsing parsing_path parsing_color
 
 RENDER_DIR = render/
 RENDER    = minimap dda raycast render_utils textures sprite dynamic_light

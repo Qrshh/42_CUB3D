@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:16:04 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/10 22:09:20 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/17 23:11:06 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	update_color(t_all **all, char *color, char id)
 	color++;
 	b = (unsigned char)ft_atoi(color);
 	if (id == 'C')
-		(*all)->color_c = (unsigned int)((r << 24) | (g << 16) | (b << 8) | 255);
+		(*all)->color_c = (unsigned int)((r << 24) \
+		| (g << 16) | (b << 8) | 255);
 	else
-		(*all)->color_f = (unsigned int)((r << 24) | (g << 16) | (b << 8) | 255);
+		(*all)->color_f = (unsigned int)((r << 24) \
+		| (g << 16) | (b << 8) | 255);
 }
 
 int	is_valid_number(char *str)
@@ -77,10 +79,10 @@ int	setting_color(char *line)
 
 void	is_valid_color(t_all **all, char *line)
 {
-	int i;
-	int j;
-	int k;
-	char *id[3];
+	int		i;
+	int		j;
+	int		k;
+	char	*id[3];
 
 	id[0] = "F  ";
 	id[1] = "C  ";
@@ -92,10 +94,8 @@ void	is_valid_color(t_all **all, char *line)
 		while (line[++k] && line[k] == ' ')
 			continue ;
 		while (id[i][++j] && line && j < 2)
-		{
 			if (id[i][j] != line[k++])
 				break ;
-		}
 		if (j == 2)
 			break ;
 	}

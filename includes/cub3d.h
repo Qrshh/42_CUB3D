@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
 /*   Updated: 2025/02/19 17:41:27 by mosmont          ###   ########.fr       */
@@ -34,6 +34,8 @@
 # define NB_SPRITE_TEX 1
 
 # define DIST_LIGHT 0.005
+
+# define NB_TEXT 5
 
 # define NORTH 0
 # define SOUTH 1
@@ -73,7 +75,7 @@ typedef struct s_dda
 typedef struct s_flash_light
 {
 	t_coord			player_dir;
-	double			dst_factor;
+	double			dist_factor;
 	double			ray_dir_norm;
 	double			player_dir_norm;
 	double			scalar_product;
@@ -125,7 +127,7 @@ typedef struct s_all
 	char			**map;
 	int				width_map;
 	char			**infos;
-	mlx_texture_t	*tab_textures[5];
+	mlx_texture_t	*tab_textures[NB_TEXT];
 	mlx_t			*mlx;
 	int				f;
 	int				c;
@@ -161,8 +163,12 @@ void				is_info_valid(t_all **all, char *line);
 void				update_count(t_all **all, char *id);
 void				is_valid_color(t_all **all, char *line);
 void				update_color(t_all **all, char *color, char id);
+void				adding_line(t_all **all, int fd, int flag);
 // UTILS
 int					only_spaces(char *str);
+int					ft_isspace(char c);
+int					is_border(int i, int j, int height, int len);
+int					is_invalid_space(char **map, int i, int j, int height);
 void				exit_error(char *str);
 void				ft_all_exit(t_all *all, char *str);
 void				free_all(t_all *all);
