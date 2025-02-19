@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 17:41:27 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:05:07 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct s_all
 	bool			sprint;
 	bool			night_vision;
 	mlx_image_t		*text_img;
+	t_raycast		*raycast;
 }					t_all;
 
 // PARSING
@@ -183,8 +184,8 @@ void				dda_loop(t_dda *dda, char **map);
 void				calculate_step(t_all *all, t_dda *dda);
 
 // DYNAMIC_LIGHT
-int					get_pixel_color(t_raycast *raycast, uint8_t *pixel,
-						bool night_vision, double player_angle);
+int					get_pixel_color(t_raycast *raycast, bool night_vision,
+						double player_angle);
 
 // SPRITE RENDER
 void				calculate_sprite_infos(t_all *all);
