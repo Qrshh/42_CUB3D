@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 20:54:45 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:31:37 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	init_ptr(t_all **all)
 	(*all)->d = 0;
 	(*all)->color_c = 0;
 	(*all)->color_f = 0;
-	(*all)->ray_img = NULL;
 	(*all)->wall_img = NULL;
 	(*all)->fov = FOV * (M_PI / 180);
 	i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 21:05:07 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:32:32 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_dda
 typedef struct s_flash_light
 {
 	t_coord			player_dir;
-	double			dist_factor;
+	double			dst_factor;
 	double			ray_dir_norm;
 	double			player_dir_norm;
 	double			scalar_product;
@@ -115,14 +115,9 @@ typedef struct s_sprite
 
 typedef struct s_all
 {
-	t_sprite		sprites[2];
-	int				num_sprites;
-	mlx_texture_t	*sprite_texture[NB_SPRITE_TEX];
-	double			z_buffer[WIDTH];
 	double			fov;
 	t_coord			player_pos;
 	double			player_angle;
-	t_coord			plane_pos;
 	int				starting_dir;
 	char			**map;
 	int				width_map;
@@ -138,9 +133,6 @@ typedef struct s_all
 	int				d;
 	int				color_c;
 	int				color_f;
-	mlx_image_t		*img;
-	mlx_image_t		*player_img;
-	mlx_image_t		*ray_img;
 	mlx_image_t		*minimap_img;
 	mlx_image_t		*wall_img;
 	bool			minimap_visible;
@@ -192,9 +184,6 @@ void				calculate_step(t_all *all, t_dda *dda);
 // DYNAMIC_LIGHT
 int					get_pixel_color(t_raycast *raycast, bool night_vision,
 						double player_angle);
-
-// SPRITE RENDER
-void				calculate_sprite_infos(t_all *all);
 
 // UTILS RENDER
 void				refresh_image(mlx_t *mlx, mlx_image_t **image);
