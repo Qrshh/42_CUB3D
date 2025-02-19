@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:12:18 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 20:56:44 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:56:46 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	free_all(t_all *all)
 		if (all->tab_textures[i])
 			mlx_delete_texture(all->tab_textures[i]);
 	}
-	mlx_terminate(all->mlx);
+	if(all->mlx)
+		mlx_terminate(all->mlx);
 	free(all);
 }
 

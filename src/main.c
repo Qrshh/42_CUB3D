@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 21:25:45 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:49:09 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void welcome(void)
+void	welcome(void)
 {
 	ft_printf("\n\
 		\033[1;36m----------------------------------\n\
-			  Bienvenue dans Cub3D !\n\
+				Bienvenue dans Cub3D !\n\
 		----------------------------------\033[0m\n\
 		\033[1;33mCommandes :\033[0m\n\
 		\033[1;32m- Se déplacer :\033[0m WASD\n\
@@ -24,7 +24,8 @@ void welcome(void)
 		\033[1;32m- Allumer la flashlight :\033[0m F\n\
 		\033[1;32m- Diriger la caméra :\033[0m Souris (P pour activer/désactiver)\n\
 		\033[1;32m- Afficher la minimap :\033[0m (M pour acitver/desactiver)\n\
-		");		
+		");
+	ft_printf("\n");
 }
 
 void	escape(void *param)
@@ -38,10 +39,11 @@ void	escape(void *param)
 
 int	main(int ac, char **av)
 {
-	t_all			*all;
+	t_all	*all;
 
-	welcome();
 	parsing(&all, ac, av);
+	welcome();
+	all->mlx = mlx_init(WIDTH, HEIGHT, "YOUPI", 1);
 	init_nightvision_text(all);
 	mlx_loop_hook(all->mlx, escape, all);
 	mlx_loop_hook(all->mlx, moove_fw_bw, all);

@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 23:13:53 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 20:39:45 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 22:17:31 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	adding_line(t_all **all, int fd, int flag)
 		}
 		else if (only_spaces(line))
 			(*all)->infos = add_line((*all)->infos, line);
-		free(line);
+		if(line)
+			free(line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 21:18:39 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:47:33 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ void	calcul_tex(t_all *all, t_raycast *raycast, int y)
 	raycast->texture_coord.y = ((y - raycast->y_start)
 			* all->tab_textures[raycast->wall_face]->height
 			/ raycast->wall_height);
-	if (raycast->texture_coord.y
-		>= (int)all->tab_textures[raycast->wall_face]->height)
-		raycast->texture_coord.y
-			= (int)all->tab_textures[raycast->wall_face]->height - 1;
+	if (raycast->texture_coord.y >= \
+		(int)all->tab_textures[raycast->wall_face]->height)
+		raycast->texture_coord.y = \
+		(int)all->tab_textures[raycast->wall_face]->height
+			- 1;
 }
 
 void	calculate_ray_light(t_raycast *raycast, double player_angle,
-	t_flash_light *flash_light)
+		t_flash_light *flash_light)
 {
 	(void)player_angle;
 	flash_light->ray_dir_norm = sqrt(raycast->dda.ray_dir.x
@@ -71,7 +72,8 @@ void	calculate_ray_light(t_raycast *raycast, double player_angle,
 	flash_light->angle_factor = (flash_light->scalar_product + 1.0) / 2.0;
 }
 
-void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light, bool night_vision)
+void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light,
+		bool night_vision)
 {
 	t_rgb	rgb;
 
@@ -93,24 +95,26 @@ void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light, bool night_
 		rgb.g = (uint8_t)(raycast->pixel[1] * flash_light->light_factor);
 		rgb.b = (uint8_t)(raycast->pixel[2] * flash_light->light_factor);
 	}
-	raycast->color = (rgb.r << 24) | (rgb.g << 16) | (rgb.b << 8) | raycast->pixel[3];
+	raycast->color = (rgb.r << 24) \
+	| (rgb.g << 16) | (rgb.b << 8) | raycast->pixel[3];
 }
 
 void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 		double player_angle, bool night_vision)
 {
-	if (raycast->texture_coord.x < 0 || raycast->texture_coord.x
-		>= (int)texture_tab[raycast->wall_face]->width)
+	if (raycast->texture_coord.x < 0
+		|| raycast->texture_coord.x >= \
+		(int)texture_tab[raycast->wall_face]->width)
 		return ;
-	if (raycast->texture_coord.y < 0 || raycast->texture_coord.y
-		>= (int)texture_tab[raycast->wall_face]->height)
+	if (raycast->texture_coord.y < 0
+		|| raycast->texture_coord.y >= \
+		(int)texture_tab[raycast->wall_face]->height)
 		return ;
 	raycast->tex_index = ((((int)raycast->texture_coord.y
 					* (int)texture_tab[raycast->wall_face]->width
-					+ (int)raycast->texture_coord.x)
-				) * texture_tab[raycast->wall_face]->bytes_per_pixel);
-	raycast->pixel
-		= &texture_tab[raycast->wall_face]->pixels[raycast->tex_index];
-	raycast->color = get_pixel_color(raycast,
-			night_vision, player_angle);
+					+ (int)raycast->texture_coord.x))
+			* texture_tab[raycast->wall_face]->bytes_per_pixel);
+	raycast->pixel = \
+	&texture_tab[raycast->wall_face]->pixels[raycast->tex_index];
+	raycast->color = get_pixel_color(raycast, night_vision, player_angle);
 }

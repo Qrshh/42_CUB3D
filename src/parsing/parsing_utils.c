@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 21:31:37 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 22:17:23 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int	is_line_map(t_all *all, char *line)
 			&& line[i] != 'N' && line[i] != 'D' && line[i] != 'E'
 			&& line[i] != 'S' && line[i] != 'W' && line[i] != ' '
 			&& line[i] != '\t')
-			ft_all_exit(all, "Forbidden char in map");
+			{
+				free(line);
+				ft_all_exit(all, "Forbidden char in map");
+			}
 		if (line[i + 1] && line[i + 1] == '\n')
 			line[i + 1] = '\0';
 	}
@@ -70,7 +73,6 @@ void	init_ptr(t_all **all)
 	*all = ft_calloc(1, sizeof(t_all));
 	(*all)->map = NULL;
 	(*all)->infos = NULL;
-	(*all)->mlx = mlx_init(WIDTH, HEIGHT, "YOUPI", 1);
 	(*all)->player_pos.x = 0;
 	(*all)->player_pos.y = 0;
 	(*all)->player_angle = 0;
