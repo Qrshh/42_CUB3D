@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:24:23 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 21:19:23 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:32:16 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	draw_minimap(t_all *all)
 {
 	int	offset_y;
 	int	color;
-	int	player_x;
-	int	player_y;
+	// int	player_x;
+	// int	player_y;
 
 	if (!all->minimap_visible)
 		return ;
@@ -42,9 +42,8 @@ void	draw_minimap(t_all *all)
 			}
 		}
 	}
-	player_x = offset_x + (all->player_pos.x / TILE_SIZE) * tile_size;
-	player_y = offset_y + (all->player_pos.y / TILE_SIZE) * tile_size;
-	mlx_image_to_window(all->mlx, all->player_img, player_x, player_y);
+	// player_x = offset_x + (all->player_pos.x / TILE_SIZE) * tile_size;
+	// player_y = offset_y + (all->player_pos.y / TILE_SIZE) * tile_size;
 	mlx_image_to_window(all->mlx, all->minimap_img, 10, 10);
 }
 
