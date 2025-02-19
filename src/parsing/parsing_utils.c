@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/17 23:38:39 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:54:45 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ int	is_line_map(t_all *all, char *line)
 			&& line[i] != 'N' && line[i] != 'D' && line[i] != 'E'
 			&& line[i] != 'S' && line[i] != 'W' && line[i] != ' '
 			&& line[i] != '\t')
-		{
 			ft_all_exit(all, "Forbidden char in map");
-		}
 		if (line[i + 1] && line[i + 1] == '\n')
 			line[i + 1] = '\0';
 	}
