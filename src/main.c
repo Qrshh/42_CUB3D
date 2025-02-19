@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:31 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 20:38:52 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:25:45 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,10 @@ void	escape(void *param)
 int	main(int ac, char **av)
 {
 	t_all			*all;
-	mlx_texture_t	*txt;
 
 	welcome();
 	parsing(&all, ac, av);
 	init_nightvision_text(all);
-	txt = mlx_load_png("textures/arrow_minimap.png");
-	// PAS TOUCHE PLZ
-	all->player_img = mlx_texture_to_image(all->mlx, txt);
-	all->num_sprites = 1;
-	all->sprites[0] = (t_sprite){1.5 * TILE_SIZE, 1.5 * TILE_SIZE, 0, 0};
-	all->sprite_texture[0] = mlx_load_png("textures/barrel.png");
 	mlx_loop_hook(all->mlx, escape, all);
 	mlx_loop_hook(all->mlx, moove_fw_bw, all);
 	mlx_loop_hook(all->mlx, moove_left_right, all);

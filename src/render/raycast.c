@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 01:16:39 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:15:49 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	draw_fov(t_all *all)
 		angle += step;
 		x++;
 	}
-	calculate_sprite_infos(all);
 	draw_minimap(all);
 }
 

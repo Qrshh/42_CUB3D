@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 01:13:03 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 01:16:45 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:15:59 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	set_color_shade(t_flash_light *flash_light, bool night_vision,
 	return ((rgb.r << 24) | (rgb.g << 16) | (rgb.b << 8) | pixel[3]);
 }
 
-int	get_pixel_color(t_raycast *raycast, uint8_t *pixel, bool night_vision,
+int	get_pixel_color(t_raycast *raycast, bool night_vision,
 		double player_angle)
 {
 	t_flash_light	flash_light;
@@ -82,5 +82,5 @@ int	get_pixel_color(t_raycast *raycast, uint8_t *pixel, bool night_vision,
 	flash_light.angle_factor *= flash_light.falloff;
 	flash_light.light_factor = flash_light.dst_factor
 		* flash_light.angle_factor;
-	return (set_color_shade(&flash_light, night_vision, pixel));
+	return (set_color_shade(&flash_light, night_vision, raycast->pixel));
 }

@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 01:13:40 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:18:39 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,18 @@ void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light, bool night_
 void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 		double player_angle, bool night_vision)
 {
-
+	if (raycast->texture_coord.x < 0 || raycast->texture_coord.x
+		>= (int)texture_tab[raycast->wall_face]->width)
+		return ;
+	if (raycast->texture_coord.y < 0 || raycast->texture_coord.y
+		>= (int)texture_tab[raycast->wall_face]->height)
+		return ;
 	raycast->tex_index = ((((int)raycast->texture_coord.y
 					* (int)texture_tab[raycast->wall_face]->width
 					+ (int)raycast->texture_coord.x)
 				) * texture_tab[raycast->wall_face]->bytes_per_pixel);
 	raycast->pixel
 		= &texture_tab[raycast->wall_face]->pixels[raycast->tex_index];
-	raycast->color = get_pixel_color(raycast, raycast->pixel,
+	raycast->color = get_pixel_color(raycast,
 			night_vision, player_angle);
 }
