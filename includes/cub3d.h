@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 01:15:28 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 17:41:27 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1000
+# define HEIGHT 800
 
 # define MOV_SPEED 5
 # define BIG_SPEED 2
@@ -113,7 +113,7 @@ typedef struct s_sprite
 
 typedef struct s_all
 {
-	t_sprite		sprites[1];
+	t_sprite		sprites[2];
 	int				num_sprites;
 	mlx_texture_t	*sprite_texture[NB_SPRITE_TEX];
 	double			z_buffer[WIDTH];

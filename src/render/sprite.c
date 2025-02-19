@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:55:02 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 01:19:45 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 17:44:47 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	calculate_sprite_infos(t_all *all)
 			sprite_angle += 2 * M_PI;
 		if (fabs(sprite_angle - all->player_angle) > (all->fov / 2))
 			all->sprites[i].distance = -1;
+		// printf("sprite dist %f sprite angle %f\n",
+		// 	all->sprites[i].distance, sprite_angle);
 		i++;
 	}
 }
