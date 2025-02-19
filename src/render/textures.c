@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/17 23:26:38 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 01:13:40 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	set_color_shade(t_raycast *raycast, t_flash_light *flash_light, bool night_
 void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 		double player_angle, bool night_vision)
 {
-	t_flash_light	flash_light;
 
 	raycast->tex_index = ((((int)raycast->texture_coord.y
 					* (int)texture_tab[raycast->wall_face]->width
@@ -107,34 +106,6 @@ void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 				) * texture_tab[raycast->wall_face]->bytes_per_pixel);
 	raycast->pixel
 		= &texture_tab[raycast->wall_face]->pixels[raycast->tex_index];
-	if (night_vision)
-	{
-		flash_light.dist_factor = 1.0 / (1.0 + 0.0005
-				* raycast->fish_eye_correction);
-	}
-	else
-	{
-		flash_light.dist_factor = 1.0 / (1.0 + DIST_LIGHT
-				* raycast->fish_eye_correction);
-	}
-	if (flash_light.dist_factor > 1.0)
-		flash_light.dist_factor = 1.0;
-	flash_light.player_dir.x = cos(player_angle);
-	flash_light.player_dir.y = sin(player_angle);
-	calculate_ray_light(raycast, player_angle, &flash_light);
-	if (night_vision)
-	{
-		flash_light.falloff = 1.0 / (1.0 + DIST_LIGHT
-			* pow(fmax(raycast->perp_wall_dist, 100), 1.5));
-	}
-	else
-	{
-		flash_light.falloff = 1.0 / (1.0 + 0.050
-			* pow(raycast->perp_wall_dist, 1.5));
-	}
-	
-	flash_light.angle_factor *= flash_light.falloff;
-	flash_light.light_factor = flash_light.dist_factor
-		* flash_light.angle_factor;
-	set_color_shade(raycast, &flash_light, night_vision);
+	raycast->color = get_pixel_color(raycast, raycast->pixel,
+			night_vision, player_angle);
 }
