@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:12:46 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 21:15:49 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 22:48:41 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ void	draw_wall(t_all *all, t_raycast *raycast, int x)
 			calcul_tex(all, raycast, y);
 			calculate_color(all->tab_textures, raycast, all->player_angle,
 				all->night_vision);
+			if (x < 0 || x >= (int)all->wall_img->width || y < 0
+				|| y >= (int)all->wall_img->height)
+				return ;
 			mlx_put_pixel(all->wall_img, x, y, raycast->color);
 		}
 		y++;
