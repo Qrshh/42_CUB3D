@@ -6,7 +6,7 @@
 /*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 01:13:03 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 21:15:59 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/20 00:44:23 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	get_pixel_color(t_raycast *raycast, bool night_vision,
 	if (night_vision)
 	{
 		flash_light.falloff = 1.0 / (1.0 + DIST_LIGHT
-				* pow(fmax(raycast->perp_wall_dist, 25), 1.5));
+				* pow(fmax(raycast->perp_wall_dist, 30), 1.5));
 	}
 	else
 	{

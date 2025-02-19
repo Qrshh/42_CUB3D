@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 23:56:36 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/20 00:46:04 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define WIDTH 1000
 # define HEIGHT 800
 
-# define MOV_SPEED 5
+# define MOV_SPEED 2
 # define BIG_SPEED 2
 # define ROT_SPEED 0.05
 # define TILE_SIZE 64
