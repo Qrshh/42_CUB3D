@@ -6,7 +6,7 @@
 /*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 22:17:23 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 22:48:23 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,32 @@ char	**add_line(char **tab, char *line)
 	return (newtab);
 }
 
-int	is_line_map(t_all *all, char *line)
+int	is_line_map(t_all *all, char *line, int fd)
 {
-	int	i;
+    int	i;
 
-	i = 0;
-	while (line[i] && line[i] == ' ')
-		i++;
-	if (!line[i] || line[i] == 'N' || line[i] == 'E' || line[i] == 'S'
-		|| line[i] == 'W' || line[i] == 'F' || line[i] == 'C' || line[i] == 'D')
-		return (0);
-	line--;
-	while (line[++i])
-	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != '\n'
-			&& line[i] != 'N' && line[i] != 'D' && line[i] != 'E'
-			&& line[i] != 'S' && line[i] != 'W' && line[i] != ' '
-			&& line[i] != '\t')
-			{
-				free(line);
-				ft_all_exit(all, "Forbidden char in map");
-			}
-		if (line[i + 1] && line[i + 1] == '\n')
-			line[i + 1] = '\0';
-	}
-	return (1);
+    i = 0;
+    while (line[i] && line[i] == ' ')
+        i++;
+    if (!line[i] || line[i] == 'N' || line[i] == 'E' || line[i] == 'S'
+        || line[i] == 'W' || line[i] == 'F' || line[i] == 'C' || line[i] == 'D')
+        return (0);
+    while (line[i])
+    {
+        if (line[i] != '0' && line[i] != '1' && line[i] != '\n'
+            && line[i] != 'N' && line[i] != 'D' && line[i] != 'E'
+            && line[i] != 'S' && line[i] != 'W' && line[i] != ' '
+            && line[i] != '\t')
+        {
+			free(line);
+			close(fd);
+            ft_all_exit(all, "Forbidden char in map");
+        }
+        if (line[i + 1] && line[i + 1] == '\n')
+            line[i + 1] = '\0';
+        i++;
+    }
+    return (1);
 }
 
 void	init_ptr(t_all **all)

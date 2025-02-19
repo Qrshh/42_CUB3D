@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:20:38 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 21:32:32 by mosmont          ###   ########.fr       */
+/*   Updated: 2025/02/19 22:48:43 by abesneux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void				parsing(t_all **all, int ac, char **av);
 void				init_ptr(t_all **all);
 void				check_args(int ac, char **av);
 int					check_format(char *str, char *cmp);
-int					is_line_map(t_all *all, char *line);
+int					is_line_map(t_all *all, char *line, int fd);
 void				check_valid_map(t_all **all);
 char				**add_line(char **tab, char *line);
 int					is_allowed_char(char c);
