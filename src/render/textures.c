@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:20:19 by mosmont           #+#    #+#             */
-/*   Updated: 2025/02/19 21:47:33 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 22:39:12 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,17 @@ void	calculate_color(mlx_texture_t **texture_tab, t_raycast *raycast,
 	if (raycast->texture_coord.x < 0
 		|| raycast->texture_coord.x >= \
 		(int)texture_tab[raycast->wall_face]->width)
+	{
+		raycast->color = 0x00000000;
 		return ;
+	}
 	if (raycast->texture_coord.y < 0
 		|| raycast->texture_coord.y >= \
 		(int)texture_tab[raycast->wall_face]->height)
+	{
+		raycast->color = 0x00000000;
 		return ;
+	}
 	raycast->tex_index = ((((int)raycast->texture_coord.y
 					* (int)texture_tab[raycast->wall_face]->width
 					+ (int)raycast->texture_coord.x))

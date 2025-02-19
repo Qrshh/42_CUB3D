@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abesneux <abesneux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mosmont <mosmont@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:26:25 by abesneux          #+#    #+#             */
-/*   Updated: 2025/02/19 22:17:23 by abesneux         ###   ########.fr       */
+/*   Updated: 2025/02/19 22:28:17 by mosmont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_line_map(t_all *all, char *line)
 	if (!line[i] || line[i] == 'N' || line[i] == 'E' || line[i] == 'S'
 		|| line[i] == 'W' || line[i] == 'F' || line[i] == 'C' || line[i] == 'D')
 		return (0);
-	line--;
+	i--;
 	while (line[++i])
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != '\n'
